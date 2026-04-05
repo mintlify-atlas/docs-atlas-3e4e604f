@@ -1,0 +1,154 @@
+---
+title: "Introduction"
+description: "How to contribute to Key Mapper — code, translations, bug reports, feature requests, and documentation."
+---
+
+Key Mapper is a free, open-source Android app licensed under GPL-3.0. Contributions of all kinds are welcome, whether you write code, speak another language, or simply have a great idea.
+
+<CardGroup cols={2}>
+  <Card title="GitHub repository" icon="github" href="https://github.com/keymapperorg/KeyMapper">
+    Browse the source code, open issues, and submit pull requests
+  </Card>
+  <Card title="Discord community" icon="discord" href="http://keymapper.app/discord">
+    Ask questions, share feedback, and chat with other contributors
+  </Card>
+</CardGroup>
+
+## Ways to contribute
+
+<CardGroup cols={2}>
+  <Card title="Report a bug" icon="bug" href="#reporting-bugs">
+    Found something broken? File a detailed issue on GitHub
+  </Card>
+  <Card title="Request a feature" icon="lightbulb" href="#requesting-a-feature">
+    Have an idea? Open a feature request on GitHub
+  </Card>
+  <Card title="Translate the app" icon="language" href="/contributing/translations">
+    Help make Key Mapper available in your language on Crowdin
+  </Card>
+  <Card title="Contribute code" icon="code" href="#contributing-code">
+    Fix bugs, implement features, and improve the codebase
+  </Card>
+</CardGroup>
+
+## Reporting bugs
+
+Use the [bug report template](https://github.com/keymapperorg/KeyMapper/issues/new?template=bug_report.yml) on GitHub. Before filing, search existing issues to check if the bug has already been reported — if it has, add a comment on that issue instead.
+
+A useful bug report includes:
+
+- **What happened** — describe the unexpected behaviour you saw
+- **What you expected** — describe what should have happened instead
+- **Steps to reproduce** — list the exact steps to trigger the bug, starting from a freshly installed app
+- **App version** — find this on the **About** page inside Key Mapper (e.g. `2.6.0 1234`)
+- **Android version** — find this in your device's **Settings** app (e.g. `Android 14`). Do not report your ROM version (OxygenOS, OneUI, etc.) — report the underlying Android version
+- **Device model and manufacturer** — be as specific as possible (e.g. `Samsung Galaxy S24`, `Xiaomi Redmi Note 12`)
+
+<Tip>
+  Attaching your exported key maps or Key Mapper logs from the **Settings** screen helps the maintainers reproduce the issue much faster.
+</Tip>
+
+## Requesting a feature
+
+Use the [feature request template](https://github.com/keymapperorg/KeyMapper/issues/new?template=feature_request.yml) on GitHub. Before submitting, search existing issues to avoid duplicates — if the feature is already requested, upvote or comment on that issue.
+
+A good feature request includes:
+
+- A clear description of what you want added
+- Who would benefit from the feature and how they would use it
+- Your device model and Key Mapper version (optional but helpful)
+
+## Contributing code
+
+### Development setup
+
+Key Mapper is an Android app written in Kotlin, built with Gradle, and developed in Android Studio.
+
+**Requirements:**
+
+- [Android Studio](https://developer.android.com/studio) (latest stable)
+- JDK 17
+- Android SDK with compile SDK 36 and min SDK 26
+- Kotlin 2.1.0
+- Rust toolchain (stable) with Android targets for `evdev` native code
+
+**Clone the repository:**
+
+```bash
+git clone https://github.com/keymapperorg/KeyMapper.git
+cd KeyMapper
+```
+
+Open the project in Android Studio and let Gradle sync. The project uses the following modules:
+
+| Module | Purpose |
+|--------|---------|
+| `app` | Main application |
+| `base` | Shared business logic and string resources |
+| `api` | Public broadcast API |
+| `data` | Data layer (Room, DataStore) |
+| `system` | Android system interactions |
+| `common` | Shared utilities |
+| `sysbridge` | System bridge (Shizuku/root) |
+| `evdev` | Native evdev input handling (Rust) |
+
+**Code style:**
+
+The project enforces Kotlin code style with [ktlint](https://ktlint.github.io/). Run the style check before submitting a pull request:
+
+```bash
+./gradlew ktlintCheck
+```
+
+To auto-format:
+
+```bash
+./gradlew ktlintFormat
+```
+
+Rust code in the `evdev` module uses `rustfmt`. Check formatting with:
+
+```bash
+cd evdev/src/main/rust/evdev_manager
+cargo fmt --check
+```
+
+### Code contribution workflow
+
+<Steps>
+  <Step title="Fork the repository">
+    Fork [keymapperorg/KeyMapper](https://github.com/keymapperorg/KeyMapper) to your GitHub account.
+  </Step>
+  <Step title="Create a branch">
+    Create a branch from `master` with a descriptive name, for example:
+
+    ```bash
+    git checkout -b fix/volume-trigger-crash
+    ```
+  </Step>
+  <Step title="Make your changes">
+    Write your code. Run unit tests to make sure nothing is broken:
+
+    ```bash
+    ./gradlew testDebugUnitTest
+    ```
+  </Step>
+  <Step title="Check code style">
+    Run ktlint to ensure your Kotlin code matches the project style:
+
+    ```bash
+    ./gradlew ktlintCheck
+    ```
+  </Step>
+  <Step title="Open a pull request">
+    Push your branch and open a pull request against `master` on the main repository. Describe what the PR does and link any related issues.
+  </Step>
+</Steps>
+
+<Note>
+  Pull requests trigger automated CI checks for unit tests, ktlint style, Rust formatting, and a full APK build. All checks must pass before a PR can be merged.
+</Note>
+
+## License
+
+Key Mapper is licensed under the [GNU General Public License v3.0](https://github.com/keymapperorg/KeyMapper/blob/master/LICENSE.md). By contributing, you agree that your contributions will be licensed under GPL-3.0.

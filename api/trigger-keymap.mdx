@@ -1,0 +1,83 @@
+---
+title: "Trigger a key map"
+description: "Send a broadcast to run a key map's actions immediately by its UID."
+---
+
+Use the `ACTION_TRIGGER_KEYMAP_BY_UID` action to programmatically fire the actions of any key map. When Key Mapper receives this broadcast, it runs the key map's actions exactly as if the trigger was pressed.
+
+## Action
+
+```
+io.github.sds100.keymapper.ACTION_TRIGGER_KEYMAP_BY_UID
+```
+
+Handled by: `TriggerKeyMapsBroadcastReceiver`
+
+## Extras
+
+<ParamField path="io.github.sds100.keymapper.EXTRA_KEYMAP_UID" type="string" required>
+  The UID of the key map to trigger. You can find this value in the key map editor inside Key Mapper.
+</ParamField>
+
+## Finding the key map UID
+
+<Steps>
+  <Step title="Open Key Mapper">
+    Launch the Key Mapper app on your device.
+  </Step>
+  <Step title="Open the key map editor">
+    Tap the key map you want to trigger to open it in the editor.
+  </Step>
+  <Step title="Copy the UID">
+    The key map's UID is shown in the editor. Copy it — you'll pass it as the `EXTRA_KEYMAP_UID` extra in your broadcast.
+  </Step>
+</Steps>
+
+## Code example
+
+<CodeGroup>
+
+```kotlin Kotlin
+import android.content.Intent
+
+val intent = Intent("io.github.sds100.keymapper.ACTION_TRIGGER_KEYMAP_BY_UID").apply {
+    `package` = "io.github.sds100.keymapper"
+    putExtra(
+        "io.github.sds100.keymapper.EXTRA_KEYMAP_UID",
+        "your-key-map-uid-here"
+    )
+}
+
+context.sendBroadcast(intent)
+```
+
+```java Java
+import android.content.Intent;
+
+Intent intent = new Intent("io.github.sds100.keymapper.ACTION_TRIGGER_KEYMAP_BY_UID");
+intent.setPackage("io.github.sds100.keymapper");
+intent.putExtra(
+    "io.github.sds100.keymapper.EXTRA_KEYMAP_UID",
+    "your-key-map-uid-here"
+);
+
+context.sendBroadcast(intent);
+```
+
+</CodeGroup>
+
+<Tip>
+  Setting the package with `setPackage` (or the `package` property in Kotlin) restricts the broadcast to Key Mapper only. This is a best practice for explicit broadcasts on Android.
+</Tip>
+
+## What happens when the broadcast fires
+
+When Key Mapper receives this broadcast:
+
+1. It looks up the key map with the matching UID.
+2. It runs all of that key map's actions immediately.
+3. The key map's constraints and enabled/disabled state are **not** checked — the actions run regardless.
+
+<Note>
+  If the UID does not match any key map, the broadcast is silently ignored. If the Key Mapper accessibility service is not running, the actions will not execute.
+</Note>

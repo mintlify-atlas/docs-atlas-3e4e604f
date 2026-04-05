@@ -1,0 +1,128 @@
+---
+title: "Expert mode"
+description: "Low-latency key remapping that intercepts input events before Android processes them."
+---
+
+Expert mode runs a system-level bridge process alongside Key Mapper that intercepts raw input events from the kernel before Android's input system sees them. This has two main benefits:
+
+- **Lower latency** — events are captured and re-injected at the driver level, which reduces the delay between pressing a button and the action firing.
+- **Consume the original event** — the trigger key event is suppressed so the original action (for example, adjusting volume) does not also happen.
+
+Expert mode is free and available on all Android versions supported by Key Mapper (Android 8.0 and above).
+
+<Warning>
+  Expert mode modifies how your device processes input at a low level. Key Mapper shows a warning when you first open Expert mode. Read it carefully before proceeding.
+</Warning>
+
+## Requirements
+
+- Android 8.0 (Oreo) or later
+- One of the following to start the system bridge:
+  - **Shizuku** (recommended) — a companion app that grants elevated shell permissions without root
+  - **Root access** — if your device is rooted
+  - **Wireless ADB** — available on Android 11 and above via developer options
+
+## Setting up with Shizuku (recommended)
+
+Shizuku is the easiest way to start Expert mode. It does not require root and it can auto-start when the device boots.
+
+<Steps>
+  <Step title="Install Shizuku">
+    Install [Shizuku](https://shizuku.rikka.app/) from the Play Store or F-Droid.
+  </Step>
+  <Step title="Start Shizuku">
+    Open Shizuku and follow its setup instructions. On Android 11 and above you can start it with wireless debugging. On Android 10 and below you need a computer with ADB connected via USB to run `adb shell sh /sdcard/Android/data/moe.shizuku.privileged.api/start.sh`.
+  </Step>
+  <Step title="Grant Key Mapper permission">
+    When Key Mapper prompts for Shizuku permission, tap **Grant**.
+  </Step>
+  <Step title="Start Expert mode">
+    In Key Mapper, open **Expert mode** and tap **Start with Shizuku**. The status changes to **Running**.
+  </Step>
+</Steps>
+
+## Setting up with wireless debugging (Android 11+)
+
+If you do not want to install Shizuku, you can use wireless ADB debugging. Key Mapper includes an interactive setup assistant that guides you through each step.
+
+<Steps>
+  <Step title="Enable developer options">
+    Go to **Settings → About phone** and tap **Build number** (or **OS version**) seven times. Your device will confirm that developer options are enabled.
+  </Step>
+  <Step title="Connect to Wi-Fi">
+    Expert mode via wireless debugging requires an active Wi-Fi connection.
+  </Step>
+  <Step title="Enable wireless debugging">
+    Go to **Settings → Developer options → Wireless debugging** and turn it on.
+  </Step>
+  <Step title="Open Expert mode in Key Mapper">
+    Tap **Expert mode** in the Key Mapper menu. The setup assistant detects your current state and shows the next step to complete.
+  </Step>
+  <Step title="Pair Key Mapper">
+    Tap **Pair** in the setup assistant. Key Mapper opens the wireless debugging pairing screen and enters the pairing code automatically.
+  </Step>
+  <Step title="Start the bridge">
+    After pairing, tap **Start**. Key Mapper runs the shell command to launch the system bridge.
+  </Step>
+</Steps>
+
+<Tip>
+  Enable **Auto-start on boot** in the Expert mode settings so the bridge restarts automatically when your device reboots. This requires either root or the `WRITE_SECURE_SETTINGS` permission to be granted.
+</Tip>
+
+## Setting up with root
+
+If your device is rooted, Expert mode can start the system bridge as root, which gives it the widest compatibility and allows auto-start on boot without any additional permissions.
+
+<Steps>
+  <Step title="Open Expert mode">
+    Tap **Expert mode** in the Key Mapper menu.
+  </Step>
+  <Step title="Start with root">
+    Tap **Start with root**. Your root manager will prompt for permission. Grant it, and the bridge starts immediately.
+  </Step>
+</Steps>
+
+## Starting manually with a shell command
+
+If you prefer to control the bridge from a terminal or ADB session, you can get the exact shell command from Key Mapper.
+
+<Steps>
+  <Step title="Open Expert mode">
+    Navigate to **Expert mode** in Key Mapper.
+  </Step>
+  <Step title="Copy the shell command">
+    Tap **Get shell command**. Key Mapper displays the command you can run with `adb shell` or a terminal app to start the bridge manually.
+  </Step>
+</Steps>
+
+## Supported Android versions
+
+| Android version | Supported | Notes |
+|---|---|---|
+| 8.0–10 | Yes | Shizuku requires USB ADB for first-time setup |
+| 11–12 | Yes | Wireless debugging available |
+| 13+ | Yes | Wireless debugging available; no USB required |
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Expert mode fails to start after 60 seconds">
+    Key Mapper shows a dialog if the bridge has not connected within 60 seconds. This usually means the shell command did not run, the ADB pairing timed out, or Wi-Fi disconnected. Tap **Try again** and make sure your Wi-Fi connection is stable.
+  </Accordion>
+  <Accordion title="Bridge disconnects when the screen locks">
+    On some Android versions (11 and 13), having the **Default USB configuration** in developer options set to anything other than **No data transfer** causes the ADB process to stop when the device locks. Go to **Settings → Developer options → Default USB configuration** and set it to **No data transfer**.
+  </Accordion>
+  <Accordion title="Errors on Xiaomi devices">
+    Xiaomi adds a non-standard security restriction called **USB debugging (Security settings)** in developer options. Enable it to allow the system bridge to inject events. Key Mapper shows a warning on the home screen if this setting is off.
+  </Accordion>
+  <Accordion title="Mediatek devices fail to start">
+    Some Mediatek devices have a Shizuku bug that prevents the bridge from starting. Key Mapper includes a workaround, but if the bridge still does not start, try the wireless ADB setup method instead.
+  </Accordion>
+  <Accordion title="Wi-Fi disconnects during setup">
+    If your Wi-Fi drops while Expert mode is configured to use wireless debugging, Key Mapper sends a notification to alert you. Reconnect to Wi-Fi and restart the bridge.
+  </Accordion>
+  <Accordion title="Key event action produces wrong characters">
+    When a key map with an Expert mode trigger injects a key code action, Key Mapper passes through the device ID of the trigger so the correct key character map is applied. If you see wrong characters, check that the trigger device is still the selected source in the key map.
+  </Accordion>
+</AccordionGroup>

@@ -1,0 +1,78 @@
+---
+title: "Groups"
+description: "Organize key maps into named groups and enable or disable them all at once."
+---
+
+Groups let you organize your key maps into named folders. Instead of scrolling through a flat list of remappings, you can keep related key maps together — for example, all your media shortcuts in one group and all your gaming macros in another.
+
+Groups can be nested. A group can have a parent group, forming a hierarchy. Key Mapper displays breadcrumbs at the top of the list so you always know where you are.
+
+## Creating a group
+
+<Steps>
+  <Step title="Open the home screen">
+    Launch Key Mapper. Your key maps appear in the main list.
+  </Step>
+  <Step title="Tap New group">
+    Tap the **+ New group** button in the group row at the top of the screen.
+  </Step>
+  <Step title="Name the group">
+    Enter a name for the group. Group names within the same parent must be unique.
+  </Step>
+  <Step title="Open the group">
+    Tap the group chip to navigate into it. The breadcrumb trail updates to show your current location.
+  </Step>
+</Steps>
+
+<Tip>
+  You can also create a **subgroup** while inside an existing group. Tap **+ New subgroup** to create a nested group under the current one.
+</Tip>
+
+## Adding key maps to a group
+
+<Steps>
+  <Step title="Navigate into the group">
+    Tap the group chip on the home screen to open it.
+  </Step>
+  <Step title="Create or move a key map">
+    Tap **New key map** to create a key map directly inside the group. To move an existing key map, open the key map, go to **Constraints and more**, and set the **Group** field to the target group.
+  </Step>
+</Steps>
+
+## Enabling and disabling all key maps in a group
+
+Each group has an enable/disable toggle. Disabling a group suspends every key map inside it without deleting them. This is useful when you want to temporarily turn off a set of remappings — for example, disabling your gaming shortcuts when you are not playing.
+
+To toggle a group:
+
+- Open the group (tap its chip on the home screen).
+- Tap the enable/disable toggle at the top of the group view.
+
+All key maps in the group, including those in subgroups, are suspended until you re-enable the group.
+
+## Group constraints
+
+Groups support constraints just like individual key maps do. A constraint on a group applies to all key maps inside it in addition to any constraints those key maps already have. This lets you share a common condition — such as "only when this app is in the foreground" — across many key maps without setting it on each one individually.
+
+Key Mapper shows the number of inherited constraints from parent groups in the constraint row of each key map.
+
+<Info>
+  Group constraints are combined with key map constraints using AND logic. Both the group constraint and the key map constraint must be satisfied for the key map to fire.
+</Info>
+
+## Use cases
+
+<CardGroup cols={2}>
+  <Card title="App-specific shortcuts" icon="mobile">
+    Group key maps by app. Apply a constraint to the group so the remappings only activate when that app is in the foreground.
+  </Card>
+  <Card title="Device profiles" icon="keyboard">
+    Create one group per input device (headphone remote, game controller, keyboard). Quickly switch profiles by enabling and disabling groups.
+  </Card>
+  <Card title="Context switching" icon="shuffle">
+    Keep a "work" group and a "personal" group. Toggle between them with a single tap when your context changes.
+  </Card>
+  <Card title="Testing new remappings" icon="flask-conical">
+    Put experimental key maps in a group, then disable the whole group when you want to go back to your baseline setup.
+  </Card>
+</CardGroup>

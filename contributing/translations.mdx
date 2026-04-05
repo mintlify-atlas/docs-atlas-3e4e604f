@@ -1,0 +1,79 @@
+---
+title: "Translations"
+description: "Help translate Key Mapper into your language on Crowdin."
+---
+
+Key Mapper is translated by community volunteers on [Crowdin](https://crowdin.com/project/key-mapper). If you speak a language other than English, you can help make Key Mapper accessible to more people.
+
+<Card title="Key Mapper on Crowdin" icon="language" href="https://crowdin.com/project/key-mapper">
+  Join the translation project and start contributing in your language
+</Card>
+
+## Available languages
+
+The following languages have active translations. Crowdin tracks translation and proofreading progress for each:
+
+| Language | Code |
+|----------|------|
+| Czech | `cs` |
+| Spanish (Spain) | `es-ES` |
+| Polish | `pl` |
+| Portuguese (Brazil) | `pt-BR` |
+| Russian | `ru` |
+| Slovak | `sk` |
+| Chinese (Simplified) | `zh-CN` |
+
+<Note>
+  Don't see your language listed? You can request a new language on the [Crowdin project page](https://crowdin.com/project/key-mapper) or ask in the [Discord community](http://keymapper.app/discord).
+</Note>
+
+## What gets translated
+
+Crowdin manages three types of content:
+
+| Source file | What it contains |
+|-------------|-----------------|
+| `strings.xml` | All in-app text — button labels, menus, error messages, settings descriptions |
+| `full_description.txt` | The full app store description (Google Play / F-Droid) |
+| `short_description.txt` | The short app store description |
+
+The English source files are the reference. Crowdin syncs translations back to the repository automatically via GitHub Actions.
+
+## How to contribute translations
+
+<Steps>
+  <Step title="Create a Crowdin account">
+    Sign up at [crowdin.com](https://crowdin.com) if you don't already have an account.
+  </Step>
+  <Step title="Join the Key Mapper project">
+    Go to [crowdin.com/project/key-mapper](https://crowdin.com/project/key-mapper) and click **Join** to become a translator.
+  </Step>
+  <Step title="Select your language">
+    Choose your target language from the project's language list. If your language is not listed, request it on the project page or ask in Discord.
+  </Step>
+  <Step title="Translate strings">
+    Open `strings.xml` for your language and start translating. Crowdin shows the English source string on the left and lets you enter the translation on the right.
+  </Step>
+  <Step title="Proofread existing translations">
+    If translations already exist for your language, you can review and approve them. Approved strings are marked as proofread and ready for release.
+  </Step>
+</Steps>
+
+## Guidelines for translators
+
+Keep these guidelines in mind when translating:
+
+- **Match the tone** — Key Mapper uses a direct, informal tone. Avoid overly formal language.
+- **Keep placeholders intact** — strings may contain placeholders like `%1$s` or `%d`. These are replaced at runtime with values (e.g. a key name or a number). Copy them exactly as they appear in the source.
+- **Preserve formatting tags** — some strings contain HTML tags like `<b>` or `<br/>`. Keep them in the same position in your translation.
+- **Use sentence case** — follow the same capitalisation rules as the English source. Do not capitalise every word unless the source does.
+- **Stay consistent** — use the same translation for recurring terms (e.g. "key map", "trigger", "action") throughout the language.
+- **Check context** — if a string is ambiguous, look at surrounding strings or use the in-app context screenshots in Crowdin to understand how it is used.
+
+<Tip>
+  Crowdin's **Translation Memory** suggests translations from previously approved strings. Use these suggestions to stay consistent, but always review them before accepting.
+</Tip>
+
+## Translation status
+
+You can see the current translation and proofreading progress for each language on the [Crowdin project page](https://crowdin.com/project/key-mapper). Languages with higher proofreading progress are closer to being fully reviewed and ready for release.

@@ -1,0 +1,162 @@
+---
+title: "Permissions"
+description: "Every permission Key Mapper needs, what it enables, and step-by-step instructions for granting each one."
+---
+
+Key Mapper requires several permissions to detect button presses and perform actions. Most are granted through Android's standard settings screens. This page explains each permission and how to enable it.
+
+## Accessibility service
+
+**Required for all key maps.** The accessibility service is how Key Mapper detects button presses from your hardware devices.
+
+<Steps>
+  <Step title="Open Key Mapper">
+    Launch Key Mapper. If the accessibility service is not running, you will see a warning on the home screen.
+  </Step>
+  <Step title="Tap the fix button">
+    Tap **Fix** next to the accessibility service warning. Key Mapper will open Android's **Accessibility** settings.
+  </Step>
+  <Step title="Enable Key Mapper">
+    Find **Key Mapper** in the list of accessibility services and toggle it on. Confirm any system dialog that appears.
+  </Step>
+</Steps>
+
+<Warning>
+  Some Android versions and manufacturers (particularly Xiaomi and devices running MIUI) restrict which apps can use the accessibility service. If you cannot find Key Mapper in the list, check your device's security or privacy settings for restrictions on accessibility services.
+</Warning>
+
+<Note>
+  On Android 13+, accessibility services may be marked as "restricted." If you see this label next to Key Mapper, tap the setting and look for an option to allow restricted settings, which may require confirmation via device settings.
+</Note>
+
+## Notification access
+
+**Required for:** dismissing notifications, reading notification content in constraints.
+
+<Steps>
+  <Step title="Open notification settings">
+    Go to **Settings > Notifications > Notification access** (path varies by manufacturer).
+  </Step>
+  <Step title="Enable Key Mapper">
+    Find **Key Mapper** and toggle it on.
+  </Step>
+</Steps>
+
+Alternatively, tap **Fix** next to the notification access warning on the Key Mapper home screen.
+
+## Do Not Disturb access
+
+**Required for:** actions that change the ringer mode or mute sounds when Do Not Disturb is active.
+
+<Steps>
+  <Step title="Open Do Not Disturb settings">
+    Go to **Settings > Sound & vibration > Do Not Disturb** or tap **Fix** on the Key Mapper home screen.
+  </Step>
+  <Step title="Grant access">
+    Find **Key Mapper** under apps that can control Do Not Disturb and enable it.
+  </Step>
+</Steps>
+
+<Note>
+  Volume button triggers bypass the Do Not Disturb permission requirement, so you only need this permission if you use actions that explicitly change DND state.
+</Note>
+
+## Write settings permission
+
+**Required for:** actions that modify system settings such as screen brightness, screen timeout, or rotation lock.
+
+<Steps>
+  <Step title="Open write settings">
+    Tap **Fix** on the Key Mapper home screen next to the write settings warning, or go to **Settings > Apps > Key Mapper > Modify system settings**.
+  </Step>
+  <Step title="Enable the permission">
+    Toggle **Allow modifying system settings** on.
+  </Step>
+</Steps>
+
+## Key Mapper keyboard (input method)
+
+**Required for:** text input actions that type characters into any app.
+
+Key Mapper includes a basic input method (keyboard) that it uses to inject text. You need to enable it as an input method — you do not need to use it as your everyday keyboard.
+
+<Steps>
+  <Step title="Open input method settings">
+    Tap **Fix** on the Key Mapper home screen, or go to **Settings > General management > Keyboard list and default** (path varies by manufacturer).
+  </Step>
+  <Step title="Enable the Key Mapper keyboard">
+    Find **Key Mapper Basic Input Method** in the list and enable it.
+  </Step>
+</Steps>
+
+<Note>
+  On Android 13 and later, Key Mapper can enable its input method without user interaction. On older versions you need to enable it manually as described above.
+</Note>
+
+## Device administrator
+
+**Required for:** the **Secure lock screen** action, which locks the device immediately bypassing the fingerprint/face unlock.
+
+<Steps>
+  <Step title="Activate device admin">
+    Tap **Fix** on the Key Mapper home screen next to the device admin warning. A system dialog will appear asking you to activate Key Mapper as a device administrator.
+  </Step>
+  <Step title="Tap Activate">
+    Confirm by tapping **Activate** in the dialog.
+  </Step>
+</Steps>
+
+<Warning>
+  To uninstall Key Mapper after granting device admin, you must first deactivate it as a device administrator in **Settings > Security > Device admin apps**.
+</Warning>
+
+## WRITE_SECURE_SETTINGS
+
+**Required for:** certain system-level actions such as enabling the accessibility service automatically, toggling mobile data, and other privileged settings.
+
+This permission cannot be granted through the standard Android UI. Key Mapper can grant it automatically if you have root access, Shizuku, or Expert mode set up.
+
+<Steps>
+  <Step title="Grant via Expert mode (recommended)">
+    Enable **Expert mode** in Key Mapper. The setup process grants `WRITE_SECURE_SETTINGS` automatically as part of the Wireless Debugging pairing flow.
+  </Step>
+  <Step title="Grant via Shizuku">
+    If you use Shizuku, grant Key Mapper the Shizuku permission. Key Mapper will automatically receive `WRITE_SECURE_SETTINGS` when Shizuku is running.
+  </Step>
+  <Step title="Grant via root">
+    If your device is rooted, grant Key Mapper root access. Key Mapper will automatically grant `WRITE_SECURE_SETTINGS` using root.
+  </Step>
+  <Step title="Grant via ADB (advanced)">
+    Connect your device to a computer with ADB and run:
+    ```bash
+    adb shell pm grant io.github.sds100.keymapper android.permission.WRITE_SECURE_SETTINGS
+    ```
+  </Step>
+</Steps>
+
+## Root access
+
+**Optional.** Root access unlocks additional actions such as toggling airplane mode, and allows Key Mapper to automatically grant `WRITE_SECURE_SETTINGS`.
+
+Root access is requested from your device's root manager (such as Magisk) the first time Key Mapper needs it. There is no manual setup step — Key Mapper will prompt your root manager automatically.
+
+<Note>
+  Root access is optional. Most Key Mapper features work without it. Use Expert mode or Shizuku as an alternative for privileged actions.
+</Note>
+
+## Battery optimisation exemption
+
+**Recommended.** Android may kill Key Mapper's accessibility service in the background to save battery.
+
+<Steps>
+  <Step title="Open battery settings">
+    Tap **Fix** on the Key Mapper home screen next to the battery optimisation warning, or go to **Settings > Apps > Key Mapper > Battery**.
+  </Step>
+  <Step title="Set to Unrestricted">
+    Choose **Unrestricted** or **Don't optimise** to prevent Android from stopping Key Mapper.
+  </Step>
+</Steps>
+
+<Tip>
+  Different manufacturers label this setting differently. If you cannot find it, check the [Don't Kill My App](https://dontkillmyapp.com/) website for device-specific instructions.
+</Tip>

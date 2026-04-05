@@ -1,0 +1,250 @@
+---
+title: "Actions"
+description: "Configure what happens when a trigger fires — from opening apps to sending key events, controlling media, and more."
+---
+
+Actions define what Key Mapper does when a trigger fires. A key map can have one action or a sequence of actions that run in order. Each action has its own options for repeating, holding down, delaying, and multiplying.
+
+## Adding an action
+
+<Steps>
+  <Step title="Open a key map">
+    Tap the key map you want to edit, or create a new one.
+  </Step>
+  <Step title="Tap Add action">
+    In the actions section, tap **Add action**.
+  </Step>
+  <Step title="Choose a category">
+    Browse the action categories and tap the one you want.
+  </Step>
+  <Step title="Configure the action">
+    Some actions require additional input — for example, choosing an app, entering text, or picking a screen coordinate.
+  </Step>
+</Steps>
+
+## Action categories
+
+Key Mapper organizes actions into categories. Every available action is listed below.
+
+<AccordionGroup>
+  <Accordion title="Apps">
+    Launch or control apps installed on your device.
+
+    - **Open app** — launch an app by its package name.
+    - **Open app shortcut** — launch a named shortcut from a specific app.
+    - **Force stop app** — force-stop the currently focused app (requires accessibility permission).
+    - **Clear recent app** — remove the currently focused app from the recents list.
+  </Accordion>
+
+  <Accordion title="Input">
+    Inject key events and touch gestures.
+
+    - **Key event** — send any Android key event, optionally with meta keys (Shift, Ctrl, Alt, Meta) and optionally from a specific device descriptor.
+    - **Tap screen** — tap a specific x/y coordinate on the screen.
+    - **Swipe screen** — swipe from one coordinate to another with a configurable finger count and duration.
+    - **Pinch screen** — perform a pinch or spread gesture at a coordinate with a configurable distance, finger count, and duration.
+    - **Input text** — type a string of text into the focused field.
+  </Accordion>
+
+  <Accordion title="Keyboard">
+    Control the on-screen keyboard and text editing.
+
+    - **Show keyboard** — show the soft keyboard.
+    - **Hide keyboard** — hide the soft keyboard.
+    - **Toggle keyboard** — show or hide the soft keyboard.
+    - **Show keyboard picker** — open the Android keyboard picker dialog.
+    - **Switch keyboard** — switch to a specific input method by IME ID.
+    - **Copy text** — copy the selected text.
+    - **Paste text** — paste text from the clipboard.
+    - **Cut text** — cut the selected text.
+    - **Select word at cursor** — select the word under the text cursor.
+    - **Move cursor** — move the text cursor by character, word, line, paragraph, or page in either direction (start or end).
+  </Accordion>
+
+  <Accordion title="Volume">
+    Adjust volume and ringer settings.
+
+    - **Volume up** — increase volume. Optionally target a specific stream (ring, media, alarm, notification, voice call, accessibility) and show or hide the volume UI.
+    - **Volume down** — decrease volume. Same stream and UI options as volume up.
+    - **Mute** — mute the device.
+    - **Unmute** — unmute the device.
+    - **Toggle mute** — mute or unmute the device.
+    - **Show volume dialog** — open the volume panel.
+    - **Mute microphone** — mute the microphone.
+    - **Unmute microphone** — unmute the microphone.
+    - **Toggle microphone mute** — toggle microphone mute.
+    - **Change ringer mode** — set the ringer to normal, silent, or vibrate.
+    - **Cycle ringer mode** — cycle through normal → vibrate → silent.
+    - **Cycle vibrate/ring** — toggle between vibrate and normal.
+    - **Enable Do Not Disturb** — enable DND in a specified mode (priority, alarms only, or total silence).
+    - **Disable Do Not Disturb** — turn off DND.
+    - **Toggle Do Not Disturb** — toggle DND in a specified mode.
+  </Accordion>
+
+  <Accordion title="Media">
+    Control media playback — either system-wide or for a specific app.
+
+    **System-wide media controls** (affect the active media session):
+    - Pause, Play, Play/pause, Next track, Previous track, Fast forward, Rewind, Stop, Step forward, Step backward
+
+    **Per-app media controls** (target a specific app's media session):
+    - Same set of controls as above, but you choose the target app by package name.
+
+    **Sound:**
+    - **Play sound** — play a sound file from your library or a device ringtone.
+  </Accordion>
+
+  <Accordion title="Navigation">
+    Trigger Android navigation actions.
+
+    - **Go back** — press the back button.
+    - **Go home** — press the home button.
+    - **Open recents** — open the recent apps screen.
+    - **Go to last app** — switch to the previously active app.
+    - **Open menu** — press the menu button.
+    - **Toggle split screen** — enter or exit split-screen mode.
+  </Accordion>
+
+  <Accordion title="Display">
+    Control screen brightness and rotation.
+
+    **Brightness:**
+    - **Enable auto-brightness** — turn on adaptive brightness.
+    - **Disable auto-brightness** — turn off adaptive brightness.
+    - **Toggle auto-brightness** — toggle adaptive brightness.
+    - **Increase brightness** — raise screen brightness by one step.
+    - **Decrease brightness** — lower screen brightness by one step.
+
+    **Rotation:**
+    - **Enable auto-rotate** — turn on auto-rotation.
+    - **Disable auto-rotate** — turn off auto-rotation.
+    - **Toggle auto-rotate** — toggle auto-rotation.
+    - **Portrait mode** — lock the screen to portrait orientation.
+    - **Landscape mode** — lock the screen to landscape orientation.
+    - **Switch orientation** — switch between portrait and landscape.
+    - **Cycle rotations** — cycle through a custom list of orientations (0°, 90°, 180°, 270°).
+
+    **Night shift:**
+    - **Enable night shift** — turn on night shift (blue light filter).
+    - **Disable night shift** — turn off night shift.
+    - **Toggle night shift** — toggle night shift.
+  </Accordion>
+
+  <Accordion title="Flashlight">
+    Control the device flashlight.
+
+    - **Toggle flashlight** — toggle the flashlight on or off. Choose front or back camera lens. Optionally set a brightness percentage.
+    - **Enable flashlight** — turn the flashlight on. Choose lens and optional brightness percentage.
+    - **Disable flashlight** — turn the flashlight off. Choose lens.
+    - **Change flashlight strength** — increase or decrease flashlight brightness by a percentage. Choose lens and the percentage change (positive to increase, negative to decrease).
+  </Accordion>
+
+  <Accordion title="Connectivity">
+    Toggle wireless radios and network connections.
+
+    **Wi-Fi:** Enable, disable, or toggle Wi-Fi.
+
+    **Bluetooth:** Enable, disable, or toggle Bluetooth.
+
+    **Mobile data:** Enable, disable, or toggle mobile data.
+
+    **Hotspot:** Enable, disable, or toggle the mobile hotspot.
+
+    **NFC:** Enable, disable, or toggle NFC.
+
+    **Airplane mode:** Enable, disable, or toggle airplane mode.
+  </Accordion>
+
+  <Accordion title="Interface">
+    Control the status bar and system UI.
+
+    - **Expand notification drawer** — pull down the notification shade.
+    - **Toggle notification drawer** — expand or collapse the notification shade.
+    - **Expand quick settings** — pull down the quick settings panel.
+    - **Toggle quick settings** — expand or collapse quick settings.
+    - **Collapse status bar** — dismiss the notification shade or quick settings panel.
+    - **Screenshot** — take a screenshot.
+    - **Open voice assistant** — invoke the voice assistant.
+    - **Open device assistant** — invoke the device assistant.
+    - **Open camera** — open the camera app.
+    - **Open settings** — open Android settings.
+    - **Show power menu** — show the power/restart dialog.
+    - **Device controls** — open the device controls panel.
+    - **Interact with UI element** — interact with a specific accessibility node in an app (click, long click, focus, etc.). Identify the element by text, hint, content description, class name, resource ID, or unique ID.
+  </Accordion>
+
+  <Accordion title="Notifications">
+    Manage system notifications.
+
+    - **Dismiss most recent notification** — dismiss the latest notification.
+    - **Dismiss all notifications** — clear all notifications.
+    - **Create notification** — show a notification with a custom title and body text. Optionally auto-dismiss it after a timeout.
+  </Accordion>
+
+  <Accordion title="Telephony">
+    Handle phone calls and SMS.
+
+    - **Answer phone call** — answer an incoming call.
+    - **End phone call** — end the current call.
+    - **Phone call** — start a call to a specified number.
+    - **Send SMS** — send an SMS to a specified number with a preset message.
+    - **Compose SMS** — open the SMS composer pre-filled with a number and message.
+  </Accordion>
+
+  <Accordion title="Special">
+    Advanced actions for automation and system integration.
+
+    - **URL** — open a URL in the default browser or app.
+    - **HTTP request** — send an HTTP/HTTPS request (GET, POST, PUT, DELETE, etc.) to a URL. Supports a request body and an authorization header. The description, method, URL, body, and authorization are all configurable.
+    - **Intent** — send an Android intent. Choose the target (activity, broadcast receiver, or service), action URI, and extras.
+    - **Shell command** — run a shell command. Set a description, the command string, execution mode, and a timeout. Requires appropriate permissions.
+    - **Modify setting** — change an Android system setting (global, secure, or system) by key and value.
+    - **Consume key event** — swallow the key event without doing anything else. Use this to suppress a button's default behaviour.
+  </Accordion>
+</AccordionGroup>
+
+## Action sequences
+
+You can add multiple actions to a single key map. Key Mapper runs them in order from top to bottom each time the trigger fires. Drag the handle on the left of each action row to reorder them.
+
+To add a pause between actions, set the **delay before next action** on the action that should wait. The delay is in milliseconds.
+
+## Action options
+
+Tap an action to open its options. The options available depend on the trigger type.
+
+### Hold down mode
+
+When **hold down** is enabled on an action, Key Mapper holds the action for the duration of the trigger press instead of firing it once. This is useful for actions like **key event** where you want the key to remain pressed.
+
+Two hold-down behaviours are available:
+
+| Mode | Description |
+|---|---|
+| **Release when trigger released** | The action is held until you release the trigger key. |
+| **Release when trigger pressed again** | The action stays held until you press the trigger a second time. Available only when **repeat** is not also enabled. |
+
+Hold down requires the trigger to perform actions on key-down (i.e., the trigger must not be a pure sequence of multiple keys or use double press for all keys).
+
+### Repeat options
+
+When **repeat** is enabled, Key Mapper fires the action repeatedly while the trigger is held. The following settings control repeating behaviour:
+
+| Option | Description |
+|---|---|
+| **Repeat rate** | How often the action repeats, in milliseconds. |
+| **Repeat delay** | How long to wait after the first trigger before repeating starts, in milliseconds. |
+| **Repeat limit** | Maximum number of times to repeat. |
+| **Stop repeating** | When repeating stops: when the trigger is released (default), when the trigger is pressed again, or when the repeat limit is reached. |
+| **Hold down before repeating** | Hold the action down for a duration before starting to repeat. |
+| **Hold down duration** | How long to hold down before repeating, in milliseconds. Available when hold down before repeating is enabled. |
+
+Repeat requires the trigger to perform actions on key-down.
+
+### Multiplier
+
+The **multiplier** fires the action multiple times in rapid succession with each trigger press. For example, a multiplier of 3 fires the action three times immediately when the trigger fires.
+
+### Delay before next action
+
+When a key map has more than one action, you can set a delay (in milliseconds) before an action runs. The delay applies between the previous action and this one.

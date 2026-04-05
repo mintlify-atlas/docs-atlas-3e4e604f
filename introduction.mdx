@@ -1,0 +1,101 @@
+---
+title: "Introduction"
+description: "Key Mapper is a free, open-source Android app that lets you remap hardware buttons, build complex macros, and design on-screen button layouts."
+---
+
+Key Mapper gives you complete control over your Android device's physical buttons. Instead of being limited to what a button does by default, you can make any button trigger any action — or a sequence of actions — under any conditions you choose.
+
+## What problem it solves
+
+Android does not expose a native API for remapping hardware buttons. Volume buttons always adjust volume, power buttons always lock the screen. Key Mapper works around this by running as an accessibility service, intercepting button presses before they reach the system, and executing your custom actions instead.
+
+This makes it useful for:
+
+- Repurposing volume buttons as media controls, camera shortcuts, or torch toggles
+- Building macros that chain multiple actions with configurable delays
+- Adding functionality to gamepads, keyboards, and mice connected over Bluetooth or USB
+- Creating on-screen floating buttons that behave like real hardware keys
+
+## Supported input devices
+
+Key Mapper works with a wide range of physical and virtual input sources:
+
+| Device | Examples |
+|--------|---------|
+| Phone buttons | Volume up, volume down, side key |
+| Game controllers | D-pad, A/B/X/Y, and most other gamepad buttons |
+| Keyboards | Any key on a physical keyboard connected via USB or Bluetooth |
+| Mouse buttons | Left, right, middle, and extra side buttons |
+| Headsets and headphones | Inline media buttons |
+| Fingerprint sensor | Swipe gestures on the fingerprint reader |
+
+<Note>
+  Joystick axes and triggers (LT/RT) on gamepads are not currently supported.
+</Note>
+
+## Key concepts
+
+Understanding these four concepts covers how Key Mapper works:
+
+### Key maps
+
+A key map is the fundamental unit in Key Mapper. It pairs one or more trigger keys with one or more actions and an optional set of constraints. You can create as many key maps as you need, enable or disable them individually, and organise them into groups.
+
+### Triggers
+
+A trigger defines which button press (or combination of button presses) activates the key map. You can configure:
+
+- **Click type** — single press, long press, or double press
+- **Multi-key triggers** — press keys in parallel (at the same time) or in sequence (one after another)
+- **Source device** — restrict the trigger to a specific connected device
+
+### Actions
+
+An action is what happens when a trigger fires. Key Mapper offers over 100 actions, including:
+
+- Opening an app or app shortcut
+- Sending a key event (simulating a keypress)
+- Controlling media playback
+- Changing volume, brightness, or ringer mode
+- Running a shell command
+- Performing a screen tap or swipe gesture
+- Sending an HTTP request
+- Showing a toast notification or triggering vibration
+
+You can combine multiple actions in a single key map and set a delay between each one.
+
+### Constraints
+
+A constraint is a condition that must be true for the key map to activate. Constraints let you make the same physical button behave differently depending on context. Examples:
+
+- Only when a specific app is in the foreground
+- Only when media is playing
+- Only when a Bluetooth device is connected
+- Only when the screen is on or off
+- Only between certain times of day
+- Only when the device is in portrait or landscape orientation
+
+You can combine multiple constraints using **AND** (all must be met) or **OR** (any must be met) logic.
+
+## Where to get Key Mapper
+
+<CardGroup cols={2}>
+  <Card title="Google Play" icon="google-play" href="https://play.google.com/store/apps/details?id=io.github.sds100.keymapper">
+    Install the latest stable release from Google Play
+  </Card>
+  <Card title="F-Droid" icon="android" href="https://f-droid.org/packages/io.github.sds100.keymapper/">
+    Install a fully open-source build without Google Play Services
+  </Card>
+</CardGroup>
+
+Both versions are functionally identical. The F-Droid build is built from source without proprietary dependencies.
+
+## Community
+
+Join the [Discord server](http://keymapper.app/discord) to get help, share your key map setups, and follow development.
+
+## System requirements
+
+- Android 8.0 (Oreo) or higher
+- Accessibility permission (required for detecting button presses)
+- Additional permissions depending on the actions you use — see [Permissions](/guides/permissions)

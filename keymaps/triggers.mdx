@@ -1,0 +1,139 @@
+---
+title: "Triggers"
+description: "Configure what button press or gesture activates a key map."
+---
+
+A trigger defines the physical input that fires a key map. Every trigger is made up of one or more keys, each with a click type, and an optional mode that controls how multiple keys are combined.
+
+## Recording a trigger
+
+<Steps>
+  <Step title="Open a key map">
+    Tap an existing key map or create a new one from the **+** button on the home screen.
+  </Step>
+  <Step title="Tap Record trigger">
+    In the trigger section, tap **Record trigger**. Key Mapper starts listening for button presses.
+  </Step>
+  <Step title="Press the button">
+    Press the physical button you want to use. Key Mapper shows the detected key code and device.
+  </Step>
+  <Step title="Stop recording">
+    Tap **Stop** when you have recorded all the keys you need. For multi-key triggers, press each key before stopping.
+  </Step>
+</Steps>
+
+<Note>
+  Some buttons (such as volume keys on incoming calls, or DPAD buttons on certain devices) require the Key Mapper keyboard to be enabled before they can be detected. Key Mapper will show a warning if this is the case.
+</Note>
+
+## Click types
+
+Each key in a trigger has a click type that determines what kind of press activates it.
+
+| Click type | Description |
+|---|---|
+| **Short press** | The key is pressed and released quickly. This is the default. |
+| **Long press** | The key is held down past the long-press threshold. |
+| **Double press** | The key is pressed twice within the double-press window. |
+
+You can configure the **long-press delay** and **double-press delay** in the trigger options to change these thresholds.
+
+<Warning>
+  Fingerprint gesture triggers and assistant triggers do not support long press or double press.
+</Warning>
+
+## Single key triggers
+
+A single key trigger fires when you press one button in a specific way. After recording, tap the key chip to change its click type, device restriction, or other per-key options.
+
+## Multi-key triggers
+
+Add more than one key to a trigger to create a combination. Key Mapper supports two modes for multi-key triggers:
+
+<Tabs>
+  <Tab title="Parallel (chord)">
+    All keys must be pressed at the same time — like a keyboard shortcut. You choose one shared click type that applies to all keys in the combination. Parallel mode is detected when all keys in the trigger are pressed simultaneously.
+  </Tab>
+  <Tab title="Sequence">
+    Keys must be pressed one after another in order within a time window. Each key in the sequence can have its own click type. You can configure the **sequence trigger timeout** to control how long Key Mapper waits for the next key in the sequence.
+  </Tab>
+</Tabs>
+
+<Tip>
+  To distinguish a two-key chord from two separate single-key actions, use parallel mode. To require a specific order, use sequence mode.
+</Tip>
+
+## Supported trigger types
+
+Key Mapper supports several types of trigger keys.
+
+<AccordionGroup>
+  <Accordion title="Key event (physical buttons)">
+    The most common trigger type. Covers any physical button that sends an Android key event: volume keys, power button, media keys on headsets, keyboard keys, DPAD buttons on gamepads, and more.
+
+    Each key event trigger has a **device** setting:
+
+    - **Any device** — fires when the key is pressed on any connected input device.
+    - **This device** — fires only when the key is pressed on the phone's own buttons.
+    - **Specific device** — fires only when the key comes from a named external device (gamepad, keyboard, headset, etc.).
+
+    You can also enable **detect by scan code** to match by the raw hardware scan code instead of the Android key code. This is useful when two keys share the same key code but have different scan codes.
+
+    The **consume key event** option (enabled by default) prevents the original key event from being passed on to other apps after Key Mapper handles it. Disable it to let the key event pass through.
+  </Accordion>
+  <Accordion title="Fingerprint gestures">
+    Trigger a key map by swiping on the fingerprint sensor. The supported gestures are:
+
+    - Swipe down
+    - Swipe up
+    - Swipe left
+    - Swipe right
+
+    Fingerprint gesture triggers only support short press — long press and double press are not available.
+  </Accordion>
+  <Accordion title="Assistant button">
+    Trigger a key map using the assistant button. You can target:
+
+    - **Any assistant** — fires for either the voice assistant or the device assistant.
+    - **Voice assistant** — the assistant invoked by a dedicated voice button (e.g., a headset button or keyboard key). Android asks you to choose an app when no default is set.
+    - **Device assistant** — the on-device assistant selected in Android settings (the one invoked by long-pressing the power button on Pixel and other devices). Only one app can hold this permission at a time.
+
+    Assistant triggers only support short press.
+  </Accordion>
+  <Accordion title="Evdev keys (expert mode)">
+    For advanced use cases, Key Mapper can read raw input events directly from Linux evdev devices using the Key Mapper system bridge. This lets you remap keys that are not normally forwarded to Android accessibility services — for example, buttons that only work when the screen is off.
+
+    Each evdev trigger key is tied to a specific device identified by its bus, vendor, and product IDs. You can choose to detect by key code or scan code.
+
+    See [Expert mode](/features/expert-mode) for setup instructions.
+  </Accordion>
+  <Accordion title="Floating button">
+    A floating button displayed on screen acts as a trigger. Tap the on-screen button to fire the key map. See [Floating buttons](/features/floating-buttons) for details.
+  </Accordion>
+</AccordionGroup>
+
+## Per-key options
+
+After recording, tap a key chip in the trigger list to open its options:
+
+| Option | Description |
+|---|---|
+| **Click type** | Short press, long press, or double press. |
+| **Device** | Any device, this device, or a specific external device. |
+| **Consume key event** | Whether Key Mapper swallows the key event (default: on). |
+| **Detect with scan code** | Match by hardware scan code instead of key code. |
+
+## Trigger-level options
+
+These options apply to the whole trigger and appear below the key list:
+
+| Option | When available | Description |
+|---|---|---|
+| **Long-press delay** | At least one long-press key | Milliseconds to hold before long press fires. |
+| **Double-press delay** | At least one double-press key | Maximum milliseconds between two presses. |
+| **Sequence trigger timeout** | Sequence mode, 2+ keys | Maximum milliseconds between keys in a sequence. |
+| **Vibrate** | Always | Vibrate when the trigger fires. |
+| **Vibration duration** | Vibrate is on, or long-press double vibration is on | Custom vibration duration in milliseconds. |
+| **Long-press double vibration** | Single long-press key or parallel mode | Vibrate once when the long-press threshold is met, and again on release. |
+| **Show toast** | Always | Show a brief on-screen message when the trigger fires. |
+| **Trigger from other apps** | Always | Allow the broadcast API to fire this key map. |

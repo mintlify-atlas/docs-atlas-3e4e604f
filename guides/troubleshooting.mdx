@@ -1,0 +1,135 @@
+---
+title: "Troubleshooting"
+description: "Solutions for common Key Mapper problems, including key maps not working, the accessibility service stopping, and device-specific issues."
+---
+
+## Key maps not working
+
+If your key maps are set up but nothing happens when you press the trigger:
+
+<Steps>
+  <Step title="Check that the accessibility service is running">
+    Open Key Mapper. If the home screen shows a warning about the accessibility service, tap **Fix** and re-enable it. The service must be running for any key map to work.
+  </Step>
+  <Step title="Check that key maps are not paused">
+    Look for a **Paused** banner at the top of the home screen. Tap **Resume** to re-enable all key maps.
+  </Step>
+  <Step title="Check that the key map is enabled">
+    On the home screen, verify the toggle next to your key map is switched on.
+  </Step>
+  <Step title="Check constraints">
+    Open the key map and go to **Constraints and more**. If you have constraints set, make sure the current conditions match — for example, the required app is in the foreground, or the required screen state is active.
+  </Step>
+  <Step title="Check that the action has required permissions">
+    Some actions require additional permissions (see the [permissions guide](/guides/permissions)). Key Mapper will show a warning icon on the action if a required permission is missing.
+  </Step>
+</Steps>
+
+## Accessibility service keeps stopping
+
+Android aggressively kills background processes on many devices, including accessibility services.
+
+<Steps>
+  <Step title="Disable battery optimisation for Key Mapper">
+    Go to **Settings > Apps > Key Mapper > Battery** and set it to **Unrestricted** or **Don't optimise**.
+  </Step>
+  <Step title="Check your device's background app restrictions">
+    Some manufacturers (especially Xiaomi, OPPO, Vivo, and Huawei) have extra battery and background restrictions beyond the standard Android settings. Check **Settings > Battery > Background app management** or a similar menu and allow Key Mapper to run in the background.
+  </Step>
+  <Step title="Consult Don't Kill My App">
+    Visit [dontkillmyapp.com](https://dontkillmyapp.com/) for device-specific instructions on keeping services alive in the background.
+  </Step>
+</Steps>
+
+<Tip>
+  Expert mode uses a separate system bridge process that is more resilient to being killed. If the accessibility service keeps stopping, enabling Expert mode may help.
+</Tip>
+
+## Expert mode won't start
+
+Expert mode requires either Wireless Debugging (Android 11+), Shizuku, or root to establish a connection to the system bridge.
+
+<Steps>
+  <Step title="Check your Android version">
+    Expert mode supports Android 8.0 and later. Make sure you are not running an older version.
+  </Step>
+  <Step title="Check your WiFi connection">
+    Expert mode uses Wireless Debugging, which requires your device to be connected to a WiFi network. If you disconnected from WiFi, Expert mode will stop and show a notification. Reconnect to WiFi and restart Expert mode.
+  </Step>
+  <Step title="Wait for the timeout dialog">
+    If Expert mode has not started after 60 seconds, Key Mapper will show a dialog with more information. Follow the instructions in the dialog.
+  </Step>
+  <Step title="Try using Shizuku">
+    If Wireless Debugging is unreliable on your device, install and start Shizuku from the Play Store or F-Droid, then grant Key Mapper the Shizuku permission. Key Mapper will use Shizuku to start Expert mode automatically.
+  </Step>
+</Steps>
+
+## Actions not working
+
+<AccordionGroup>
+  <Accordion title="Text input action does nothing">
+    The **Key Mapper Basic Input Method** must be enabled. Go to **Settings > Keyboard** (path varies by device) and enable **Key Mapper Basic Input Method** in the list. See the [permissions guide](/guides/permissions) for details.
+
+    On Android 13 and later, the text action does not require the Key Mapper keyboard.
+  </Accordion>
+  <Accordion title="Volume / brightness / system settings actions fail">
+    These actions may require the **Write settings** permission. Open Key Mapper, look for a warning on the home screen, and tap **Fix** to grant the permission.
+  </Accordion>
+  <Accordion title="Secure lock screen action does nothing">
+    This action requires the **Device administrator** permission. Open Key Mapper, tap **Fix** next to the device admin warning, and activate Key Mapper as a device administrator.
+  </Accordion>
+  <Accordion title="Mobile data / airplane mode action fails">
+    These actions require `WRITE_SECURE_SETTINGS` or root. Enable Expert mode or grant root access to Key Mapper. See the [permissions guide](/guides/permissions) for how to grant `WRITE_SECURE_SETTINGS`.
+  </Accordion>
+  <Accordion title="Launch app action has a long delay">
+    If you are on the home screen when the action fires, there can be a delay of a few seconds. This is a known Android behavior and not specific to Key Mapper.
+  </Accordion>
+</AccordionGroup>
+
+## Trigger not detected
+
+If pressing a button does not register when you tap **Record trigger**:
+
+- Make sure the accessibility service is running.
+- Try pressing the button several times. Key Mapper records the first press it detects.
+- Enable **Expert mode** and try recording again. Expert mode detects inputs at a lower level and can pick up buttons that the accessibility API misses.
+- Some buttons (such as the power button on certain devices) are captured by Android before the accessibility service sees them. Use Expert mode or the **Side key / assistant trigger** option for power-button remapping.
+
+## Known issues by Android version and manufacturer
+
+<AccordionGroup>
+  <Accordion title="Xiaomi / MIUI">
+    - Key Mapper may not be able to launch the Wireless Debugging settings screen directly due to a MIUI restriction. If Expert mode setup gets stuck, go to **Settings > Developer options > Wireless debugging** manually.
+    - On some Xiaomi devices, Expert mode's event injection may fail. Key Mapper will show a warning on the home screen with instructions to fix it. You may need to enable **USB debugging (Security settings)** in **Developer options**.
+    - The **Launch app** action requires an additional permission on Xiaomi devices. Key Mapper will show a warning with a fix button.
+  </Accordion>
+  <Accordion title="Mediatek devices">
+    A known Shizuku bug on some Mediatek devices can prevent Expert mode from starting via Shizuku. Key Mapper applies a workaround automatically, but if Expert mode still will not start, use the Wireless Debugging method instead.
+  </Accordion>
+  <Accordion title="Android 14+">
+    - Closing the status bar with an action is not available on Android 14 and later due to new API restrictions.
+    - Bluetooth actions (toggle Bluetooth, connect device) are deprecated on Android 13+ due to Android security restrictions.
+    - Device controls actions are not available on Android 16+ due to API removal.
+  </Accordion>
+  <Accordion title="Android 11">
+    An Android 11 bug changes the language of external keyboard input when an accessibility service is active. If your keyboard types in the wrong language after enabling Key Mapper, check the Key Mapper Discord or documentation for the workaround guide.
+  </Accordion>
+</AccordionGroup>
+
+## How to report a bug
+
+<Steps>
+  <Step title="Reproduce the issue">
+    Try to identify the exact steps that cause the problem. Note your Android version, device model, and Key Mapper version (visible in **Settings > About**).
+  </Step>
+  <Step title="Collect a log">
+    Go to **Settings > View log** in Key Mapper. Tap the share button to export the log as a text file.
+  </Step>
+  <Step title="Open an issue on GitHub">
+    Tap the **Report bug** button in the Key Mapper home screen menu, or go to [github.com/keymapperorg/KeyMapper/issues](https://github.com/keymapperorg/KeyMapper/issues) directly. Attach the log file and describe the steps to reproduce the issue.
+  </Step>
+</Steps>
+
+<Tip>
+  You can also ask for help in the [Discord community](http://keymapper.app/discord) before filing a bug report. Community members may have already found a solution.
+</Tip>

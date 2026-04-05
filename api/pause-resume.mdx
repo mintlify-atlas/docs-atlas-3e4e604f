@@ -1,0 +1,115 @@
+---
+title: "Pause and resume mappings"
+description: "Broadcast intents to pause, resume, or toggle all Key Mapper mappings at once."
+---
+
+Use these actions to stop all key maps from firing or bring them back. This is useful when you need Key Mapper to stay out of the way temporarily — for example, during a game where you don't want accidental remaps, or when running an app that needs the original button behavior.
+
+## Actions
+
+All three actions are handled by `PauseMappingsBroadcastReceiver`. None of them require any extras.
+
+### Pause all mappings
+
+```
+io.github.sds100.keymapper.ACTION_PAUSE_MAPPINGS
+```
+
+Stops all key maps from responding to triggers until you resume them.
+
+### Resume all mappings
+
+```
+io.github.sds100.keymapper.ACTION_RESUME_MAPPINGS
+```
+
+Restores all key maps so they respond to triggers again.
+
+### Toggle all mappings
+
+```
+io.github.sds100.keymapper.ACTION_TOGGLE_MAPPINGS
+```
+
+Pauses mappings if they are currently active, or resumes them if they are currently paused.
+
+## Code examples
+
+<CodeGroup>
+
+```kotlin pause — Kotlin
+import android.content.Intent
+
+val intent = Intent("io.github.sds100.keymapper.ACTION_PAUSE_MAPPINGS").apply {
+    `package` = "io.github.sds100.keymapper"
+}
+
+context.sendBroadcast(intent)
+```
+
+```java pause — Java
+import android.content.Intent;
+
+Intent intent = new Intent("io.github.sds100.keymapper.ACTION_PAUSE_MAPPINGS");
+intent.setPackage("io.github.sds100.keymapper");
+
+context.sendBroadcast(intent);
+```
+
+</CodeGroup>
+
+<CodeGroup>
+
+```kotlin resume — Kotlin
+import android.content.Intent
+
+val intent = Intent("io.github.sds100.keymapper.ACTION_RESUME_MAPPINGS").apply {
+    `package` = "io.github.sds100.keymapper"
+}
+
+context.sendBroadcast(intent)
+```
+
+```java resume — Java
+import android.content.Intent;
+
+Intent intent = new Intent("io.github.sds100.keymapper.ACTION_RESUME_MAPPINGS");
+intent.setPackage("io.github.sds100.keymapper");
+
+context.sendBroadcast(intent);
+```
+
+</CodeGroup>
+
+<CodeGroup>
+
+```kotlin toggle — Kotlin
+import android.content.Intent
+
+val intent = Intent("io.github.sds100.keymapper.ACTION_TOGGLE_MAPPINGS").apply {
+    `package` = "io.github.sds100.keymapper"
+}
+
+context.sendBroadcast(intent)
+```
+
+```java toggle — Java
+import android.content.Intent;
+
+Intent intent = new Intent("io.github.sds100.keymapper.ACTION_TOGGLE_MAPPINGS");
+intent.setPackage("io.github.sds100.keymapper");
+
+context.sendBroadcast(intent);
+```
+
+</CodeGroup>
+
+## Use cases
+
+- **Gaming**: Send `ACTION_PAUSE_MAPPINGS` when your game launches and `ACTION_RESUME_MAPPINGS` when it closes, so Key Mapper doesn't interfere with in-game controls.
+- **Media apps**: Pause mappings when a video player is in the foreground so volume buttons behave normally, then resume when the user exits.
+- **Hardware shortcut**: Map a button combination to `ACTION_TOGGLE_MAPPINGS` so you can quickly flip Key Mapper on and off without opening the app.
+
+<Note>
+  These actions affect all key maps globally. To control individual key maps, use the [enable and disable API](/api/enable-disable) instead.
+</Note>

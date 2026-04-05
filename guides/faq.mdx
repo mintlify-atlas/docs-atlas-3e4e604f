@@ -1,0 +1,74 @@
+---
+title: "FAQ"
+description: "Answers to frequently asked questions about Key Mapper."
+---
+
+<AccordionGroup>
+  <Accordion title="Does Key Mapper require root?">
+    No. Root is optional. The vast majority of Key Mapper's features work without root, using the Android Accessibility Service. Root unlocks a small number of additional actions (such as toggling airplane mode) and allows Key Mapper to automatically grant the `WRITE_SECURE_SETTINGS` permission.
+
+    If you want privileged features without root, use Expert mode (via Wireless Debugging or Shizuku) instead.
+  </Accordion>
+
+  <Accordion title="Is it safe to use?">
+    Yes. Key Mapper is free and open-source under the GPL-3.0 license. The source code is publicly available on [GitHub](https://github.com/keymapperorg/KeyMapper) for anyone to inspect.
+
+    Key Mapper temporarily records button presses while you use it and does not transmit this data anywhere. Since version 1.1.5, the app contains no analytics or tracking libraries. See the [privacy policy](https://github.com/keymapperorg/KeyMapper/blob/master/PRIVACY_POLICY.md) for full details.
+  </Accordion>
+
+  <Accordion title="Why does the accessibility service get killed?">
+    Android's battery optimisation system can stop background services, including accessibility services, to save power. This is particularly aggressive on devices from Xiaomi, Huawei, OPPO, Vivo, and other manufacturers that add their own battery management on top of Android.
+
+    To prevent this, go to **Settings > Apps > Key Mapper > Battery** and set the background activity option to **Unrestricted**. For device-specific instructions, see [dontkillmyapp.com](https://dontkillmyapp.com/).
+
+    Expert mode is also more resilient to being killed because it runs through a separate system-level bridge process.
+  </Accordion>
+
+  <Accordion title="Can I use multiple triggers?">
+    Yes. You can combine multiple buttons into a single trigger in two ways:
+
+    - **Parallel trigger** — all buttons must be held down at the same time (like a keyboard shortcut).
+    - **Sequence trigger** — buttons must be pressed one after another within a time window.
+
+    You can also combine buttons from different devices in the same trigger — for example, a key on a Bluetooth keyboard and a volume button on the phone.
+  </Accordion>
+
+  <Accordion title="Can I remap the power button?">
+    Yes, but with limitations. The standard accessibility service cannot intercept the power button before Android handles it. To remap the power button, use the **Side key / assistant trigger** option when setting up your trigger, or enable **Expert mode**, which can detect the power button at a lower level.
+  </Accordion>
+
+  <Accordion title="Does it work on Android TV?">
+    Yes. Key Mapper supports Android TV. The app includes a leanback launcher so it appears in the TV launcher. All core remapping features work on Android TV, including D-pad remapping and key event actions.
+  </Accordion>
+
+  <Accordion title="How does Expert mode differ from normal mode?">
+    Normal mode uses the Android Accessibility Service to detect button presses. This works well for most devices but has limitations: some buttons cannot be detected, and there can be latency when injecting key events.
+
+    Expert mode connects to a system bridge that reads raw input events directly from the Linux input subsystem using `evdev`. This enables:
+
+    - Detection of buttons the accessibility API cannot see
+    - Lower latency when performing key event actions
+    - Remapping buttons even when the screen is off (for supported buttons)
+    - Working on devices where the accessibility service is restricted
+
+    Expert mode requires Wireless Debugging (Android 11+), Shizuku, or root to establish the system bridge connection.
+  </Accordion>
+
+  <Accordion title="Can I share my key maps?">
+    Yes. Open the home screen menu and tap **Export**. Key Mapper creates a `.zip` file containing your key maps that you can share with anyone. They can import it by opening the file with Key Mapper or using the **Import** option in the menu.
+
+    You can also share individual key maps by long-pressing a key map on the home screen and selecting **Export**.
+  </Accordion>
+
+  <Accordion title="What's the difference between free and paid features?">
+    Key Mapper is free and open-source. Two advanced trigger types — the **assistant / side key trigger** and **floating buttons as triggers** — require a one-time in-app purchase to unlock on the Google Play version. Core remapping functionality (recording triggers from physical buttons, all 100+ actions, constraints, Expert mode) is completely free.
+
+    The F-Droid build does not support in-app purchasing. To use advanced triggers, download Key Mapper from Google Play.
+  </Accordion>
+
+  <Accordion title="How do I back up my key maps?">
+    Go to the home screen menu and tap **Export all**. Key Mapper generates a `.zip` file you can save to any location. To restore, tap **Import** from the same menu and select your backup file.
+
+    You can also import key maps by opening a `.zip` backup file from any file manager or sharing app — Key Mapper will open and offer to import it.
+  </Accordion>
+</AccordionGroup>

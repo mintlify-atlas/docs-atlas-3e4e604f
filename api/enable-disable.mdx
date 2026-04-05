@@ -1,0 +1,159 @@
+---
+title: "Enable and disable key maps"
+description: "Broadcast intents to enable, disable, or toggle individual key maps by UID."
+---
+
+Use these actions to control individual key maps without affecting the rest of your mappings. Each action targets a single key map identified by its UID.
+
+## Actions
+
+All three actions are handled by `EnableKeyMapsBroadcastReceiver` and require the `EXTRA_KEYMAP_UID` extra.
+
+### Enable a key map
+
+```
+io.github.sds100.keymapper.ACTION_ENABLE_KEY_MAP
+```
+
+Enables the key map with the given UID so it can respond to its trigger.
+
+### Disable a key map
+
+```
+io.github.sds100.keymapper.ACTION_DISABLE_KEY_MAP
+```
+
+Disables the key map with the given UID so it no longer responds to its trigger.
+
+### Toggle a key map
+
+```
+io.github.sds100.keymapper.ACTION_TOGGLE_KEY_MAP
+```
+
+Enables the key map if it is currently disabled, or disables it if it is currently enabled.
+
+## Extras
+
+<ParamField path="io.github.sds100.keymapper.EXTRA_KEYMAP_UID" type="string" required>
+  The UID of the key map to enable, disable, or toggle. You can find this value in the key map editor inside Key Mapper. The broadcast is ignored if this extra is missing or does not match any key map.
+</ParamField>
+
+## Finding the key map UID
+
+<Steps>
+  <Step title="Open Key Mapper">
+    Launch the Key Mapper app on your device.
+  </Step>
+  <Step title="Open the key map editor">
+    Tap the key map you want to control to open it in the editor.
+  </Step>
+  <Step title="Copy the UID">
+    The key map's UID is shown in the editor. Copy it — you'll pass it as the `EXTRA_KEYMAP_UID` extra in your broadcast.
+  </Step>
+</Steps>
+
+## Code examples
+
+<CodeGroup>
+
+```kotlin enable — Kotlin
+import android.content.Intent
+
+val intent = Intent("io.github.sds100.keymapper.ACTION_ENABLE_KEY_MAP").apply {
+    `package` = "io.github.sds100.keymapper"
+    putExtra(
+        "io.github.sds100.keymapper.EXTRA_KEYMAP_UID",
+        "your-key-map-uid-here"
+    )
+}
+
+context.sendBroadcast(intent)
+```
+
+```java enable — Java
+import android.content.Intent;
+
+Intent intent = new Intent("io.github.sds100.keymapper.ACTION_ENABLE_KEY_MAP");
+intent.setPackage("io.github.sds100.keymapper");
+intent.putExtra(
+    "io.github.sds100.keymapper.EXTRA_KEYMAP_UID",
+    "your-key-map-uid-here"
+);
+
+context.sendBroadcast(intent);
+```
+
+</CodeGroup>
+
+<CodeGroup>
+
+```kotlin disable — Kotlin
+import android.content.Intent
+
+val intent = Intent("io.github.sds100.keymapper.ACTION_DISABLE_KEY_MAP").apply {
+    `package` = "io.github.sds100.keymapper"
+    putExtra(
+        "io.github.sds100.keymapper.EXTRA_KEYMAP_UID",
+        "your-key-map-uid-here"
+    )
+}
+
+context.sendBroadcast(intent)
+```
+
+```java disable — Java
+import android.content.Intent;
+
+Intent intent = new Intent("io.github.sds100.keymapper.ACTION_DISABLE_KEY_MAP");
+intent.setPackage("io.github.sds100.keymapper");
+intent.putExtra(
+    "io.github.sds100.keymapper.EXTRA_KEYMAP_UID",
+    "your-key-map-uid-here"
+);
+
+context.sendBroadcast(intent);
+```
+
+</CodeGroup>
+
+<CodeGroup>
+
+```kotlin toggle — Kotlin
+import android.content.Intent
+
+val intent = Intent("io.github.sds100.keymapper.ACTION_TOGGLE_KEY_MAP").apply {
+    `package` = "io.github.sds100.keymapper"
+    putExtra(
+        "io.github.sds100.keymapper.EXTRA_KEYMAP_UID",
+        "your-key-map-uid-here"
+    )
+}
+
+context.sendBroadcast(intent)
+```
+
+```java toggle — Java
+import android.content.Intent;
+
+Intent intent = new Intent("io.github.sds100.keymapper.ACTION_TOGGLE_KEY_MAP");
+intent.setPackage("io.github.sds100.keymapper");
+intent.putExtra(
+    "io.github.sds100.keymapper.EXTRA_KEYMAP_UID",
+    "your-key-map-uid-here"
+);
+
+context.sendBroadcast(intent);
+```
+
+</CodeGroup>
+
+## Use cases
+
+- **App-specific profiles**: Disable a set of key maps when a specific app opens and re-enable them when the user leaves that app.
+- **Contextual remapping**: Enable a key map for accessibility controls only when a media app is in the foreground.
+- **Mode switching**: Toggle between two key maps that handle the same button differently depending on your current activity.
+
+<Tip>
+  To control all key maps at once, use the [pause and resume API](/api/pause-resume) instead.
+</Tip>

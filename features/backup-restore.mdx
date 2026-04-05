@@ -1,0 +1,92 @@
+---
+title: "Backup and restore"
+description: "Save your key maps to a file and restore them on the same device or a new one."
+---
+
+Backing up your key maps protects your configuration against accidental deletion, factory resets, and app data loss. A backup file is also the easiest way to share a set of remappings with another person or move your configuration to a new device.
+
+## What is included in a backup
+
+A Key Mapper backup is a `.zip` file that contains everything needed to reproduce your setup:
+
+- All key maps and their triggers, actions, and constraints
+- Groups and the group hierarchy
+- Floating button layouts and individual button configurations
+- Default timing settings (long-press delay, double-press delay, repeat rate, repeat delay, sequence trigger timeout, vibration duration)
+- Sound files referenced by **Play sound** actions
+
+<Info>
+  The backup file name is generated automatically from the current date and time, for example `key_maps_2026-01-25_14-30.zip`.
+</Info>
+
+## Creating a backup
+
+<Steps>
+  <Step title="Open the backup screen">
+    From the Key Mapper home screen, tap the menu icon and select **Backup & restore**.
+  </Step>
+  <Step title="Tap Back up everything">
+    Tap **Back up everything**. Key Mapper collects all your key maps, groups, floating layouts, and settings into a single archive.
+  </Step>
+  <Step title="Share or save the file">
+    The system share sheet appears. Save the file to your local storage, a cloud drive, or send it to another app. The backup is complete when the file is saved.
+  </Step>
+</Steps>
+
+<Tip>
+  You can also configure an **automatic backup location** in Key Mapper settings. When enabled, Key Mapper writes a backup to a fixed file path (`key_mapper.zip`) every time you change a key map. This keeps a recent backup without any manual steps.
+</Tip>
+
+## Backing up selected key maps only
+
+If you only want to share a subset of your key maps rather than everything:
+
+<Steps>
+  <Step title="Select key maps">
+    On the home screen, long-press a key map to enter selection mode, then tap any additional key maps you want to include.
+  </Step>
+  <Step title="Tap Back up selected">
+    Tap the overflow menu and choose **Back up selected**. Only the selected key maps, their associated groups, and any floating button layouts they reference are included in the backup.
+  </Step>
+  <Step title="Share or save the file">
+    Use the share sheet to save or send the file.
+  </Step>
+</Steps>
+
+## Restoring from a backup
+
+When you restore a backup you can choose how existing key maps are handled.
+
+| Restore type | What happens |
+|---|---|
+| **Append** | Key maps from the backup are added alongside your existing key maps. Both sets coexist. |
+| **Replace** | Your existing key maps are deleted and replaced with the ones from the backup. |
+
+<Warning>
+  The **Replace** restore type permanently deletes your current key maps before importing the backup. Make sure you have a current backup of your own configuration before using Replace.
+</Warning>
+
+<Steps>
+  <Step title="Open the backup screen">
+    From the Key Mapper home screen, tap the menu icon and select **Backup & restore**.
+  </Step>
+  <Step title="Tap Restore">
+    Tap **Restore** and pick the backup `.zip` file from your storage.
+  </Step>
+  <Step title="Choose a restore type">
+    Select **Append** to keep your existing key maps, or **Replace** to overwrite them. Key Mapper shows how many key maps are in the backup before you confirm.
+  </Step>
+  <Step title="Confirm the restore">
+    Tap **Restore**. Key Mapper imports the key maps, groups, floating buttons, timing settings, and sound files from the backup.
+  </Step>
+</Steps>
+
+## Sharing key maps between devices
+
+Backups are device-independent. You can create a backup on one device and restore it on a completely different device or Android version. Key Mapper automatically migrates old backup formats to the current schema, so backups from older versions of Key Mapper are supported.
+
+<Note>
+  If a backup was created with a newer version of Key Mapper than what is installed on the target device, the restore will fail with a "backup version too new" error. Update Key Mapper to the latest version before restoring.
+</Note>
+
+Group hierarchies are preserved across devices. If a group in the backup has a parent that does not exist on the target device, Key Mapper moves that group to the root level instead of discarding it.

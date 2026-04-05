@@ -1,0 +1,164 @@
+---
+title: "Constraints"
+description: "Control when a key map is active by adding conditions based on app, screen state, connectivity, orientation, and more."
+---
+
+Constraints let you make a key map active only in specific situations. Without constraints, a key map fires every time its trigger is pressed, regardless of what is on screen or what state the device is in. Adding constraints lets you build context-aware remappings — for example, remapping a volume button to skip tracks only when Spotify is in the foreground.
+
+## How constraints work
+
+A key map can have any number of constraints. Key Mapper evaluates them each time the trigger fires:
+
+- **AND mode** — all constraints must be satisfied. Use this when you need multiple conditions to be true at the same time.
+- **OR mode** — at least one constraint must be satisfied. Use this when any one of several conditions should allow the key map to fire.
+
+To switch between AND and OR, tap the mode toggle in the constraints section of the key map editor.
+
+<Note>
+  Constraints are checked in addition to the key map's enabled/disabled state. A key map that is disabled never fires, regardless of constraints.
+</Note>
+
+## Adding a constraint
+
+<Steps>
+  <Step title="Open a key map">
+    Tap the key map you want to edit.
+  </Step>
+  <Step title="Tap Add constraint">
+    In the constraints section, tap **Add constraint**.
+  </Step>
+  <Step title="Choose a constraint type">
+    Browse the available constraints and select one.
+  </Step>
+  <Step title="Configure if needed">
+    Some constraints require additional input, such as choosing an app or a Bluetooth device name.
+  </Step>
+</Steps>
+
+## All constraint types
+
+<AccordionGroup>
+  <Accordion title="App">
+    Restrict based on which app is visible or playing media.
+
+    - **App in foreground** — the chosen app is the currently active app on screen.
+    - **App not in foreground** — the chosen app is not the currently active app.
+    - **App playing media** — the chosen app has an active media session.
+    - **App not playing media** — the chosen app does not have an active media session.
+    - **Media playing** — any app is playing media.
+    - **No media playing** — no app is playing media.
+  </Accordion>
+
+  <Accordion title="Bluetooth">
+    Restrict based on Bluetooth device connectivity.
+
+    - **Bluetooth device connected** — a specific Bluetooth device (identified by its address and name) is currently connected.
+    - **Bluetooth device disconnected** — the specified Bluetooth device is not connected.
+  </Accordion>
+
+  <Accordion title="Screen">
+    Restrict based on the screen's power state.
+
+    - **Screen on** — the display is awake and on.
+    - **Screen off** — the display is off.
+  </Accordion>
+
+  <Accordion title="Display orientation">
+    Restrict based on the current display rotation as reported by Android.
+
+    - **Display orientation: portrait** — the display is in portrait orientation.
+    - **Display orientation: landscape** — the display is in landscape orientation.
+    - **Display orientation: 0°** — the display is at 0° rotation.
+    - **Display orientation: 90°** — the display is at 90° rotation.
+    - **Display orientation: 180°** — the display is at 180° rotation.
+    - **Display orientation: 270°** — the display is at 270° rotation.
+  </Accordion>
+
+  <Accordion title="Physical orientation">
+    Restrict based on the physical orientation of the device, independent of the display rotation setting.
+
+    - **Physical orientation: portrait** — the device is physically held in portrait.
+    - **Physical orientation: landscape** — the device is physically held in landscape.
+    - **Physical orientation: portrait inverted** — the device is physically upside-down portrait.
+    - **Physical orientation: landscape inverted** — the device is physically upside-down landscape.
+  </Accordion>
+
+  <Accordion title="Flashlight">
+    Restrict based on the flashlight state.
+
+    - **Flashlight on** — the flashlight on the chosen camera lens (front or back) is on.
+    - **Flashlight off** — the flashlight on the chosen lens is off.
+  </Accordion>
+
+  <Accordion title="Wi-Fi">
+    Restrict based on Wi-Fi state or network connection.
+
+    - **Wi-Fi on** — Wi-Fi is enabled.
+    - **Wi-Fi off** — Wi-Fi is disabled.
+    - **Wi-Fi connected** — the device is connected to a Wi-Fi network. Optionally restrict to a specific SSID.
+    - **Wi-Fi disconnected** — the device is not connected to a Wi-Fi network. Optionally restrict to a specific SSID.
+  </Accordion>
+
+  <Accordion title="Input method (IME)">
+    Restrict based on which keyboard is selected.
+
+    - **IME chosen** — a specific input method (chosen by IME ID) is currently selected as the active keyboard.
+    - **IME not chosen** — the specified input method is not the active keyboard.
+    - **Keyboard showing** — the soft keyboard is visible on screen.
+    - **Keyboard not showing** — the soft keyboard is not visible.
+  </Accordion>
+
+  <Accordion title="Lock screen">
+    Restrict based on device lock state.
+
+    - **Device is locked** — the device is locked (keyguard is active).
+    - **Device is unlocked** — the device is unlocked.
+    - **Lock screen showing** — the lock screen UI is visible.
+    - **Lock screen not showing** — the lock screen UI is not visible.
+  </Accordion>
+
+  <Accordion title="Phone call">
+    Restrict based on telephony state.
+
+    - **In phone call** — a call is active.
+    - **Not in phone call** — no call is active.
+    - **Phone ringing** — an incoming call is ringing.
+  </Accordion>
+
+  <Accordion title="Charging">
+    Restrict based on whether the device is charging.
+
+    - **Charging** — the device is connected to a charger.
+    - **Discharging** — the device is running on battery.
+  </Accordion>
+
+  <Accordion title="Hinge (foldable devices)">
+    Restrict based on the hinge state of a foldable device.
+
+    - **Hinge closed** — the device is folded (hinge closed).
+    - **Hinge open** — the device is unfolded (hinge open).
+  </Accordion>
+
+  <Accordion title="Time">
+    Restrict to a specific time window during the day.
+
+    - **Time** — the key map is only active between a start time and an end time (hour and minute). The window wraps across midnight if the end time is earlier than the start time.
+  </Accordion>
+</AccordionGroup>
+
+## Common use cases
+
+<CardGroup cols={2}>
+  <Card title="Per-app volume control" icon="volume-high">
+    Add an **App in foreground** constraint so a volume key only skips tracks when your music app is open, and behaves normally everywhere else.
+  </Card>
+  <Card title="Headphone button remapping" icon="headphones">
+    Combine a **Bluetooth device connected** constraint with a media action so the remap only applies when your headset is connected.
+  </Card>
+  <Card title="Landscape-only shortcut" icon="mobile-screen">
+    Use a **Display orientation: landscape** constraint to trigger a key map only when the screen is rotated, such as remapping a button in a game.
+  </Card>
+  <Card title="Time-based do not disturb" icon="clock">
+    Use a **Time** constraint together with a Do Not Disturb action to enable DND automatically during a scheduled window each day.
+  </Card>
+</CardGroup>

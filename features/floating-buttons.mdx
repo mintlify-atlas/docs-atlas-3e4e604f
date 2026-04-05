@@ -1,0 +1,109 @@
+---
+title: "Floating buttons"
+description: "Create on-screen virtual buttons that you can tap to trigger key maps."
+---
+
+Floating buttons are virtual on-screen keys that appear as a transparent overlay on top of all your other apps. You tap them like physical buttons, and Key Mapper treats each tap as a trigger for a key map. They are useful when your device lacks a physical button for a particular action, or when you want a convenient shortcut visible on screen at all times.
+
+Floating buttons are organized into **layouts**. A layout is a named collection of buttons that can be shown or hidden together. You can create multiple layouts for different contexts — for example, a media-control layout and a gaming layout.
+
+## Creating a floating layout
+
+<Steps>
+  <Step title="Open Floating Buttons">
+    From the Key Mapper home screen, tap the menu and select **Floating Buttons**.
+  </Step>
+  <Step title="Create a new layout">
+    Tap **New layout**, enter a name for the layout, then tap **Create**.
+  </Step>
+  <Step title="Add buttons to the layout">
+    Inside the layout, tap **Add button**. A new button appears on screen at a default position.
+  </Step>
+  <Step title="Configure each button">
+    Tap a button to open its settings. Adjust the appearance and position options described below.
+  </Step>
+  <Step title="Save the layout">
+    Tap **Save** when you are done. The layout becomes available as a trigger source in your key maps.
+  </Step>
+</Steps>
+
+## Button appearance
+
+Each button has four appearance properties you can adjust.
+
+| Property | Default | Range |
+|---|---|---|
+| **Label text** | *(empty)* | Any text |
+| **Size** | 40 dp | 20–120 dp |
+| **Background opacity** | 50% | 0–100% |
+| **Border opacity** | 100% | 0–100% |
+
+<Note>
+  If you set both **Background opacity** and **Border opacity** to 0 and leave the label blank, the button becomes completely invisible when not pressed. This is intentional and lets you place invisible hotspot buttons on screen.
+</Note>
+
+<Tip>
+  Use a short label like `▶` or `+` so you can identify buttons at a glance without making them too large.
+</Tip>
+
+## Button position
+
+By default, button positions are **locked** after you place them. This prevents accidental movement while you are using the button as a trigger.
+
+To move a button:
+
+<Steps>
+  <Step title="Unlock the position">
+    In the button settings, disable **Lock position**. The button gains a drag handle.
+  </Step>
+  <Step title="Drag to the new position">
+    Long-press and drag the button to where you want it. Key Mapper saves the position relative to the current screen size and orientation, so the button lands in the same spot when you rotate the device.
+  </Step>
+  <Step title="Lock the position again">
+    Re-enable **Lock position** when you are happy with the placement.
+  </Step>
+</Steps>
+
+## Display options
+
+Each button has two overlay options that control how it is layered on screen.
+
+- **Show over status bar** — the button appears above the status bar, useful for edge-of-screen placements.
+- **Show over input method** — the button remains visible when a keyboard is open, so you can use it while typing.
+
+## Using floating buttons as triggers
+
+Once you have saved a layout, you can use any button in it as a key map trigger.
+
+<Steps>
+  <Step title="Open or create a key map">
+    From the home screen, tap an existing key map or tap **New key map**.
+  </Step>
+  <Step title="Record the trigger">
+    On the **Trigger and actions** tab, tap **Record trigger**, then tap the floating button you want to use. Key Mapper registers the button as the trigger.
+  </Step>
+  <Step title="Add your actions">
+    Add one or more actions that fire when the button is tapped, then save the key map.
+  </Step>
+</Steps>
+
+<Info>
+  Floating button triggers work with all the standard trigger options, including long-press, double-tap, and sequence triggers.
+</Info>
+
+## Use cases
+
+<CardGroup cols={2}>
+  <Card title="Media controls" icon="play">
+    Place play, pause, and skip buttons on screen so you can control audio without unlocking your device or switching apps.
+  </Card>
+  <Card title="Accessibility shortcuts" icon="universal-access">
+    Add large, high-contrast buttons for frequently used actions that are otherwise buried in menus.
+  </Card>
+  <Card title="Gaming macros" icon="gamepad">
+    Create invisible hotspot buttons over a game's HUD to trigger macros without disrupting the visual layout.
+  </Card>
+  <Card title="One-handed use" icon="hand">
+    Position shortcuts in reach of your thumb so you can perform multi-step actions with a single tap.
+  </Card>
+</CardGroup>

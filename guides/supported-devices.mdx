@@ -1,0 +1,81 @@
+---
+title: "Supported devices"
+description: "Learn which input devices Key Mapper can detect and remap, and how to get unsupported hardware working."
+---
+
+Key Mapper can remap a wide range of physical and virtual input devices on Android 8.0 and later.
+
+## Supported devices
+
+<CardGroup cols={2}>
+  <Card title="Volume buttons" icon="volume-high">
+    Both volume up and volume down buttons on any Android device.
+  </Card>
+  <Card title="Power / side key" icon="power-off">
+    The power or side key, including the Bixby button on Samsung devices (detected as the assistant key).
+  </Card>
+  <Card title="Game controllers" icon="gamepad">
+    D-pad directions and face buttons (A, B, X, Y) on USB and Bluetooth gamepads.
+  </Card>
+  <Card title="Keyboards" icon="keyboard">
+    All keys on wired and Bluetooth keyboards, including function keys and media keys.
+  </Card>
+  <Card title="Mouse buttons" icon="computer-mouse">
+    Left, right, middle, and side buttons on wired and Bluetooth mice.
+  </Card>
+  <Card title="Headsets and headphones" icon="headphones">
+    Inline media controls and call buttons on wired and Bluetooth headsets.
+  </Card>
+  <Card title="Fingerprint sensor" icon="fingerprint">
+    Swipe gestures on side-mounted or rear fingerprint sensors (device support varies).
+  </Card>
+  <Card title="Floating buttons" icon="hand-pointer">
+    Custom on-screen buttons you design yourself in Key Mapper.
+  </Card>
+</CardGroup>
+
+## What is not currently supported
+
+The following inputs cannot be remapped at this time:
+
+- **Joystick axes** — analog stick movement on gamepads
+- **Triggers (LT / RT)** — analog shoulder triggers on gamepads
+
+<Note>
+  D-pad directions and face buttons (ABXY) on gamepads are fully supported. Only the analog axes and triggers are excluded.
+</Note>
+
+## Bluetooth keyboards and gamepads
+
+Bluetooth keyboards and gamepads work the same as wired ones. Connect the device to your Android device, then record a trigger in Key Mapper by pressing the button you want to remap.
+
+<Tip>
+  If Key Mapper does not detect a Bluetooth controller after pairing, try pressing a button on the controller to wake it up, then attempt to record the trigger again.
+</Tip>
+
+## Nintendo Switch Joy-Con compatibility
+
+Joy-Cons can be paired to an Android device over Bluetooth, but compatibility depends on the Android version and device manufacturer. When paired, Key Mapper treats Joy-Cons as a standard Bluetooth gamepad. Button detection works the same as any other controller — record a trigger and press the Joy-Con button you want to map.
+
+<Warning>
+  Joy-Con support is not guaranteed on all Android devices or versions. If buttons are not detected, try using Expert mode, which uses lower-level input event detection.
+</Warning>
+
+## Tips for unsupported or undetected devices
+
+If a button is not detected when you press **Record trigger**:
+
+<Steps>
+  <Step title="Try Expert mode">
+    Enable **Expert mode** in Key Mapper settings. Expert mode reads raw input events at a lower level than the standard accessibility service and can detect keys that the accessibility API misses.
+  </Step>
+  <Step title="Check for scan code detection">
+    In the trigger configuration screen, Key Mapper will automatically try scan code detection if the key code is unknown. This can detect physical keys that Android does not assign a key code to.
+  </Step>
+  <Step title="Use a floating button instead">
+    If a physical button genuinely cannot be detected, you can create an on-screen floating button as a replacement trigger. Go to **Floating buttons** in the app to design your layout.
+  </Step>
+  <Step title="Report the device">
+    If your device or controller is not working, open an issue on the [Key Mapper GitHub repository](https://github.com/keymapperorg/KeyMapper/issues) or ask in the [Discord community](http://keymapper.app/discord). The team prioritizes adding support for reported hardware.
+  </Step>
+</Steps>

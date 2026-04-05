@@ -1,0 +1,115 @@
+---
+title: "Installation"
+description: "Install Key Mapper from Google Play or F-Droid, grant the required permissions, and verify the setup is working."
+---
+
+## Install Key Mapper
+
+Key Mapper is available on two distribution channels. Both versions are free and contain the same features.
+
+<CardGroup cols={2}>
+  <Card title="Google Play" icon="google-play" href="https://play.google.com/store/apps/details?id=io.github.sds100.keymapper">
+    Automatic updates. Requires a Google account.
+  </Card>
+  <Card title="F-Droid" icon="android" href="https://f-droid.org/packages/io.github.sds100.keymapper/">
+    Built entirely from source. No Google Play Services required.
+  </Card>
+</CardGroup>
+
+<Info>
+  The app's package ID is `io.github.sds100.keymapper`. Android 8.0 (API level 26) or higher is required.
+</Info>
+
+## Required permissions overview
+
+Key Mapper needs several permissions to function. You grant most of them the first time you use a feature that depends on them.
+
+| Permission | Why it's needed |
+|-----------|-----------------|
+| Accessibility service | Detects button presses from any input device |
+| Post notifications | Shows the pause/resume notification in the status bar |
+| Display over other apps | Required for floating button layouts |
+| Write settings | Needed for actions that change brightness or system settings |
+| Do Not Disturb access | Required for actions that change the ringer mode |
+| Camera | Required for the torch (flashlight) toggle action |
+| Answer phone calls | Required for the Answer Call action |
+
+<Note>
+  Key Mapper only requests a permission when you actually use a feature that needs it. You will not be prompted for all of the above on first launch.
+</Note>
+
+## Enable the accessibility service
+
+The accessibility service is the core requirement. Without it, Key Mapper cannot detect any button presses, and none of your key maps will work.
+
+<Steps>
+  <Step title="Open Key Mapper">
+    Launch Key Mapper. If the service is not enabled, a red banner appears at the top of the home screen.
+  </Step>
+  <Step title="Tap Enable on the banner">
+    Tap the **Enable** button in the red banner. Key Mapper will try to open Android's Accessibility settings directly. If it cannot find the settings page on your device, it will show a dialog with manual instructions.
+  </Step>
+  <Step title="Find Key Mapper in the accessibility list">
+    In Android's **Accessibility** settings, locate **Key Mapper** under **Downloaded apps** or **Installed services** (the exact label varies by manufacturer and Android version). Tap it.
+  </Step>
+  <Step title="Turn on the service">
+    Tap the toggle to enable the service. Android will show a dialog explaining that an accessibility service can observe your actions. Tap **Allow** to confirm.
+
+    <Warning>
+      On some devices (particularly Samsung and Xiaomi) Android 13+ labels this as a **Restricted setting**. If you see this message, you must first tap **Allow restricted settings** in the confirmation dialog before the toggle becomes available.
+    </Warning>
+  </Step>
+  <Step title="Return to Key Mapper">
+    Navigate back to Key Mapper. The red banner should be replaced by a green indicator confirming that the service is running.
+  </Step>
+</Steps>
+
+### If you can't find the accessibility settings
+
+Some heavily customised Android ROMs (common on Xiaomi MIUI, Huawei EMUI, and similar) place accessibility settings in a non-standard location, which prevents Key Mapper from navigating there automatically. In this case:
+
+1. Key Mapper shows a dialog offering to help via **Expert mode** (Shizuku). Follow the Expert mode setup guide.
+2. Alternatively, search for "Accessibility" in your device's system settings search bar and enable Key Mapper manually.
+
+## Set up the Key Mapper keyboard
+
+Some actions require the **Key Mapper keyboard** (an input method) to be active. These include:
+
+- Typing text into input fields
+- Forwarding key events from volume buttons to apps (such as answering calls with volume buttons)
+
+<Steps>
+  <Step title="Open Key Mapper settings">
+    Tap the gear icon on the home screen to open **Settings**.
+  </Step>
+  <Step title="Navigate to Automatically change IME">
+    Tap **Automatically change IME** in the Settings screen.
+  </Step>
+  <Step title="Enable change IME on input focus">
+    Turn on **Switch to Key Mapper keyboard when an input field is focused**. Key Mapper will switch back to your normal keyboard automatically when you leave an input field.
+  </Step>
+  <Step title="Enable the keyboard in Android settings">
+    The first time you use a text action, Android will prompt you to enable the Key Mapper keyboard as an input method. Tap **Go to settings** and toggle it on in **Languages & input → On-screen keyboard** (path varies by device).
+  </Step>
+</Steps>
+
+<Tip>
+  If you only need the keyboard for answering calls with volume buttons, you do not need to enable the automatic IME switching. The Key Mapper keyboard just needs to be installed and enabled in Android settings.
+</Tip>
+
+## Verify the setup is working
+
+After completing the steps above, confirm everything is ready:
+
+1. Open Key Mapper. The home screen should show a **green** accessibility service indicator at the top.
+2. Create a simple test key map: tap **+**, record a volume button as the trigger, add a **Toast message** action with any text, and save.
+3. Press the volume button. A toast notification should appear on screen.
+4. Delete the test key map when you are done.
+
+If the toast does not appear, check the following:
+
+- The accessibility service indicator on the home screen is green (not red or orange)
+- The key map is enabled (the toggle next to it is on)
+- No constraint errors are shown on the key map card — tap the card to see details
+
+For persistent issues, see the [troubleshooting guide](/guides/troubleshooting).

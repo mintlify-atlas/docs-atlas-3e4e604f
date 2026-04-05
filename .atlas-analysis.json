@@ -1,0 +1,101 @@
+{
+  "projectType": "saas",
+  "projectName": "Key Mapper",
+  "projectDescription": "An Android app that lets users remap hardware buttons, create custom macros, and design on-screen floating button layouts with over 100 actions and flexible trigger/constraint options.",
+  "theme": "almond",
+  "primaryColor": "#1866c2",
+  "lightColor": "#dad4e0",
+  "darkColor": null,
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Documentation",
+        "groups": [
+          {
+            "group": "Get Started",
+            "pages": [
+              "introduction",
+              "quickstart",
+              "installation"
+            ]
+          },
+          {
+            "group": "Key Maps",
+            "pages": [
+              "keymaps/overview",
+              "keymaps/triggers",
+              "keymaps/actions",
+              "keymaps/constraints"
+            ]
+          },
+          {
+            "group": "Features",
+            "pages": [
+              "features/floating-buttons",
+              "features/expert-mode",
+              "features/groups",
+              "features/backup-restore"
+            ]
+          },
+          {
+            "group": "Guides",
+            "pages": [
+              "guides/supported-devices",
+              "guides/permissions",
+              "guides/troubleshooting",
+              "guides/faq"
+            ]
+          },
+          {
+            "group": "Contributing",
+            "pages": [
+              "contributing/introduction",
+              "contributing/translations"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "API Reference",
+        "groups": [
+          {
+            "group": "Broadcast API",
+            "pages": [
+              "api/overview",
+              "api/trigger-keymap",
+              "api/pause-resume",
+              "api/enable-disable"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "keyFeatures": [
+    "Remap hardware buttons (volume, side key, gamepad, keyboard, mouse, headset, fingerprint sensor)",
+    "Create complex macros with over 100 available actions",
+    "Flexible trigger types: long press, double press, multi-key combinations",
+    "Constraints to control when key maps are active (app in foreground, screen state, Bluetooth device, time of day, etc.)",
+    "On-screen floating button layouts to create virtual keys in any app",
+    "Expert Mode via Shizuku for low-latency event injection without root",
+    "Key map groups for organizing and batch-controlling mappings",
+    "Backup and restore key maps",
+    "Broadcast API for integration with other Android apps",
+    "Bluetooth device-aware key mapping"
+  ],
+  "publicApiSurface": [
+    "Api.ACTION_TRIGGER_KEYMAP_BY_UID",
+    "Api.EXTRA_KEYMAP_ID",
+    "Api.ACTION_PAUSE_MAPPINGS",
+    "Api.ACTION_RESUME_MAPPINGS",
+    "Api.ACTION_TOGGLE_MAPPINGS",
+    "Api.ACTION_ENABLE_KEY_MAP",
+    "Api.ACTION_DISABLE_KEY_MAP",
+    "Api.ACTION_TOGGLE_KEY_MAP",
+    "TriggerKeyMapsBroadcastReceiver",
+    "PauseMappingsBroadcastReceiver",
+    "EnableKeyMapsBroadcastReceiver",
+    "LaunchKeyMapShortcutActivity",
+    "KeyEventRelayService"
+  ]
+}

@@ -1,0 +1,78 @@
+---
+title: "Broadcast API overview"
+description: "Control Key Mapper from other apps using Android broadcast intents."
+---
+
+The Key Mapper Broadcast API lets you interact with Key Mapper from any other Android app. You can trigger specific key maps by UID, pause or resume all mappings, and enable or disable individual key maps — all by sending an Android broadcast intent.
+
+## How Android broadcast intents work
+
+Android broadcasts are a messaging system that lets apps send signals to other apps on the same device. To use the Key Mapper API, your app sends a broadcast intent with a specific action string and, where required, an extra that carries additional data (such as a key map UID). Key Mapper listens for these intents and responds immediately.
+
+You do not need any special permissions to send these broadcasts, but Key Mapper must be installed on the device.
+
+## API package name
+
+All action and extra strings use the Key Mapper package name as a prefix:
+
+```
+io.github.sds100.keymapper
+```
+
+<Note>
+  Debug and CI builds of Key Mapper use a different package name. The broadcast API only works with the standard release build package name shown above.
+</Note>
+
+## Available actions
+
+| Action | Description |
+|---|---|
+| `io.github.sds100.keymapper.ACTION_TRIGGER_KEYMAP_BY_UID` | Trigger a specific key map by its UID |
+| `io.github.sds100.keymapper.ACTION_PAUSE_MAPPINGS` | Pause all mappings |
+| `io.github.sds100.keymapper.ACTION_RESUME_MAPPINGS` | Resume all mappings |
+| `io.github.sds100.keymapper.ACTION_TOGGLE_MAPPINGS` | Toggle all mappings between paused and resumed |
+| `io.github.sds100.keymapper.ACTION_ENABLE_KEY_MAP` | Enable a specific key map by its UID |
+| `io.github.sds100.keymapper.ACTION_DISABLE_KEY_MAP` | Disable a specific key map by its UID |
+| `io.github.sds100.keymapper.ACTION_TOGGLE_KEY_MAP` | Toggle a specific key map between enabled and disabled |
+
+## Finding a key map UID
+
+Several API actions require you to specify a key map by its UID. To find the UID of a key map:
+
+<Steps>
+  <Step title="Open Key Mapper">
+    Launch the Key Mapper app on your device.
+  </Step>
+  <Step title="Open the key map editor">
+    Tap the key map you want to control to open it in the editor.
+  </Step>
+  <Step title="Copy the UID">
+    The key map's UID is displayed in the editor. Copy it to use in your broadcast intent.
+  </Step>
+</Steps>
+
+## API stability
+
+<Warning>
+  The API receiver classes (`TriggerKeyMapsBroadcastReceiver`, `PauseMappingsBroadcastReceiver`, `EnableKeyMapsBroadcastReceiver`) must not be moved to a different package. Moving them breaks the API.
+</Warning>
+
+The action and extra string values defined in `Api.kt` are stable. Do not depend on the class names or package structure of Key Mapper internals — only depend on the documented action and extra strings.
+
+## API module source
+
+The API classes live in the `api` module of the Key Mapper repository on [GitHub](https://github.com/keymapperorg/KeyMapper/tree/master/api).
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Trigger a key map" icon="play" href="/api/trigger-keymap">
+    Fire a key map's actions on demand from your app
+  </Card>
+  <Card title="Pause and resume" icon="circle-pause" href="/api/pause-resume">
+    Pause, resume, or toggle all mappings at once
+  </Card>
+  <Card title="Enable and disable" icon="toggle-on" href="/api/enable-disable">
+    Control individual key maps by UID
+  </Card>
+</CardGroup>

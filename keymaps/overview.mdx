@@ -1,0 +1,76 @@
+---
+title: "Key maps overview"
+description: "Understand what key maps are and how triggers, actions, and constraints work together."
+---
+
+A key map is a rule that tells Key Mapper what to do when you press a button. Every key map has three parts:
+
+- **Trigger** — the button press (or combination) that activates the key map
+- **Actions** — what happens when the trigger fires
+- **Constraints** — conditions that must be true for the key map to be active
+
+<CardGroup cols={3}>
+  <Card title="Triggers" icon="bolt" href="/keymaps/triggers">
+    Define which button or combination activates the key map.
+  </Card>
+  <Card title="Actions" icon="play" href="/keymaps/actions">
+    Choose what happens — open apps, send key events, control media, and more.
+  </Card>
+  <Card title="Constraints" icon="filter" href="/keymaps/constraints">
+    Limit when the key map is active based on app, screen state, connectivity, and more.
+  </Card>
+</CardGroup>
+
+## The key map list
+
+When you open Key Mapper, you see the key map list. Each row shows:
+
+- The trigger (the button or combination you recorded)
+- The actions that will run
+- Any constraints that restrict when the key map is active
+- An enable/disable toggle
+
+Tap a key map to open it and edit its trigger, actions, or constraints.
+
+## Enabling and disabling key maps
+
+Each key map has a toggle on the right side of its row. Turn it off to disable the key map without deleting it. You can also enable or disable all key maps at once from the app menu.
+
+<Tip>
+  Use the broadcast API to enable and disable key maps from other apps or automation tools. See the [API reference](/api/enable-disable).
+</Tip>
+
+## How a key map fires
+
+When you press a button, Key Mapper checks every enabled key map:
+
+1. Does the trigger match the button press (key code, click type, and device)?
+2. Are all active constraints satisfied?
+3. If yes, run the actions in order.
+
+If multiple key maps match the same trigger, Key Mapper runs all of them.
+
+## Key map options
+
+Several options control how a key map behaves when it fires. These options live on the trigger and on individual actions.
+
+<AccordionGroup>
+  <Accordion title="Vibrate on trigger">
+    Key Mapper vibrates the device when the trigger fires. You can set a custom vibration duration. For long-press triggers, you can enable a double vibration — once when the key is held long enough and again when it is released.
+  </Accordion>
+  <Accordion title="Show toast on trigger">
+    Key Mapper shows a brief on-screen message when the trigger fires. This is useful for testing a key map without looking at the screen.
+  </Accordion>
+  <Accordion title="Trigger from other apps">
+    Allows other apps to fire this key map using the Key Mapper broadcast API.
+  </Accordion>
+  <Accordion title="Hold down action">
+    An action can be held down for the duration of the trigger press rather than fired once. See [hold down mode](/keymaps/actions#hold-down-mode) for details.
+  </Accordion>
+  <Accordion title="Repeat action">
+    An action can repeat automatically while the trigger is held. You can configure the repeat rate, initial delay, repeat limit, and when repeating stops. See [repeat options](/keymaps/actions#repeat-options) for details.
+  </Accordion>
+  <Accordion title="Delay before next action">
+    When a key map has multiple actions, you can insert a delay (in milliseconds) before each action in the sequence.
+  </Accordion>
+</AccordionGroup>
